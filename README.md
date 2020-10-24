@@ -1,2 +1,5 @@
-# MrC
-Medical-recoreds Chain
+# MrC 
+Medical-records Chain
+
+medical-records base blockchain technology
+
