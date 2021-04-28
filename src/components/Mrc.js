@@ -20,18 +20,28 @@ class Mrc extends Component{
             hasError: false
         }
       }
+    
 
+    // start the mrc 
+    renderStart(){
+        if(this.state.hasError){
+            return <div id="error" className="text-center" style={{color: "red"}} ><p className="text-center">Something wrong happend...</p></div>
+        }
+        else{
+            return <div><b id="hello" style={{fontSize:"20px", paddingLeft:"20px" }}>Hello {this.props.account}</b></div>
+        }
+
+    }
     render(){
-        return(
+        
+        return( 
             <main>
-            {
-                this.state.hasError
-                ?<div id="error" className="text-center" style={{color: "red"}} ><p className="text-center">Something wrong happend...</p></div>
-                : <div><b id="hello" style={{fontSize:"20px", paddingLeft:"20px" }}>Hello {this.props.account}</b></div>
-            }
+            {this.renderStart()}
+            {this.state.mrc.length == 0 
+            ? <div className="text-center" style={{color:"orange", fontSize: "40px"}} ><b>Your MrC is empty!</b></div>
+            :<div></div>}
             </main>
         );
     }
 }
-
 export default Mrc;

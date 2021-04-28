@@ -61,6 +61,7 @@ class App extends Component {
                 ? <div id="loader" className="text-center"><p className="text-center">You need to login...</p></div>
                 : <mean>
                   <Header account={this.state.account} />
+                    <br/><br/>
                     <Mrc account={this.state.account} />
                     <br/><br/><br/><br/>
                   <Foother />
