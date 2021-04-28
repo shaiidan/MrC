@@ -1,0 +1,37 @@
+=============== Apr 22, 2021 (EEST) ===============
+20:37:51.497638 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:37:51.511644 db@open opening
+20:37:51.512639 version@stat F·[] S·0B[] Sc·[]
+20:37:51.515637 db@janitor F·2 G·0
+20:37:51.515637 db@open done T·3.9931ms
+20:38:17.858102 db@close closing
+20:38:17.859113 db@close done T·1.011ms
+=============== Apr 22, 2021 (EEST) ===============
+20:48:06.149535 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:48:06.149535 version@stat F·[] S·0B[] Sc·[]
+20:48:06.150543 db@open opening
+20:48:06.150543 journal@recovery F·1
+20:48:06.162539 journal@recovery recovering @1
+20:48:06.179535 memdb@flush created L0@2 N·73 S·1005B "loc..seq,v2":"version,v1"
+20:48:06.183535 version@stat F·[1] S·1005B[1005B] Sc·[0.25]
+20:48:06.204536 db@janitor F·3 G·0
+20:48:06.204536 db@open done T·53.9933ms
+21:20:14.274438 db@close closing
+21:20:14.275453 db@close done T·1.015ms
+=============== Apr 22, 2021 (EEST) ===============
+21:25:19.489259 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:25:19.490266 version@stat F·[1] S·1005B[1005B] Sc·[0.25]
+21:25:19.490266 db@open opening
+21:25:19.490266 journal@recovery F·1
+21:25:19.492259 journal@recovery recovering @3
+21:25:19.539251 memdb@flush created L0@5 N·308 S·2KiB "loc..seq,v75":"n:\xf2..ail,v86"
+21:25:19.543255 version@stat F·[2] S·3KiB[3KiB] Sc·[0.50]
+21:25:19.624255 db@janitor F·4 G·0
+21:25:19.624255 db@open done T·133.9902ms
+21:25:42.199054 table@compaction L0·2 -> L1·0 S·3KiB Q·466
+21:25:42.247346 table@build created L1@8 N·10 S·603B "loc..seq,v75":"version,v1"
+21:25:42.247346 version@stat F·[0 1] S·603B[0B 603B] Sc·[0.00 0.00]
+21:25:42.276064 table@compaction committed F-1 S-3KiB Ke·0 D·371 T·77.0104ms
+21:25:42.277059 table@remove removed @2
+21:45:44.388858 db@close closing
+21:45:44.388858 db@close done T·0s
