@@ -32,8 +32,25 @@ contract Permissions {
     string data;
   }
 
+  event EmrAdded(
+    uint emrId,
+    address writer,
+    address owner, 
+    TypeEmr typeEmr, 
+    StatusEmr statusEmr,
+    string time,
+    string data
+  );
+
+   event ServiceProviderPermissionCall(
+    address owner,
+    address serviceProvider,
+    bool permission
+  );
+
+
   /* Every user has a list of EMRs. */
-  mapping (address => EMR[]) public emrs;
+  mapping (address => EMR[]) private emrs;
 
    /**
    * A user can specify, which service providers are allowed to view their medical records.
@@ -41,7 +58,7 @@ contract Permissions {
    * As soon as the user address is removed from the list, access for the service provider is revoked.
    * mapping: patientAddress -> ServiceProviderAddresses
    */
-  mapping (address => address[]) public serviceProvidersPermissions;
+  mapping (address => address[]) private serviceProvidersPermissions;
 
   /**
    * Add a medical record.
@@ -62,6 +79,8 @@ contract Permissions {
     }
     require(serviceProviderPermission,'Permission needed');
     emrs[owner].push(EMR(emrs[owner].length +1,msg.sender, owner, typeEmr, statuseEmr, time, data));
+    //trigger 
+    emit EmrAdded(emrs[owner].length +1,msg.sender, owner, typeEmr, statuseEmr, time, data); // call the event
   }
  
   /**
@@ -97,6 +116,7 @@ contract Permissions {
     }
     require(!serviceProviderPermissionExist,'service provider has permission already');
     serviceProvidersPermissions[from].push(serviceProvider);
+    emit ServiceProviderPermissionCall(from,serviceProvider,true); //call event
   }
 
   /**
@@ -110,19 +130,21 @@ contract Permissions {
         indexRemove = int(i);
       }
     }
-    if(indexRemove != -1){
-      address[] memory arrayNew = new address[](serviceProvidersPermissions[from].length-1);
-      for (uint i = 0; i<arrayNew.length; i++){
-        if(i != uint(indexRemove) && i< uint(indexRemove)){
-          arrayNew[i] = serviceProvidersPermissions[from][i];
-        }
-        else {
-          arrayNew[i] = serviceProvidersPermissions[from][i+1];
-        }
+
+    require(indexRemove != -1, 'This service provider not have permission already');
+
+    address[] memory arrayNew = new address[](serviceProvidersPermissions[from].length-1);
+    for (uint i = 0; i<arrayNew.length; i++){
+      if(i != uint(indexRemove) && i< uint(indexRemove)){
+        arrayNew[i] = serviceProvidersPermissions[from][i];
       }
-      delete serviceProvidersPermissions[from];
-      serviceProvidersPermissions[from] = arrayNew;
+      else {
+        arrayNew[i] = serviceProvidersPermissions[from][i+1];
+      }
     }
+    delete serviceProvidersPermissions[from];
+    serviceProvidersPermissions[from] = arrayNew;
+    emit ServiceProviderPermissionCall(from,serviceProvider,false); //call event
   }
 
   /**
