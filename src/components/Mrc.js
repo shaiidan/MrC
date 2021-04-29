@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Mrc extends Component{
+class Mrc extends Component {
 
     async componentWillMount() {
         await this.checkAccount()
@@ -9,7 +9,7 @@ class Mrc extends Component{
     async checkAccount(){
         if(this.props.account === undefined ){
             window.alert('You need courrect account!')
-            this.state.hasError = true;
+            this.setState({ hasError: true})
         }
     }
 
@@ -19,6 +19,7 @@ class Mrc extends Component{
             mrc: [],
             hasError: false
         }
+        this.checkAccount = this.checkAccount.bind(this)
       }
     
 

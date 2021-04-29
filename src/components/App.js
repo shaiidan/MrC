@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import Web3 from 'web3'
 import './App.css'
 import Permission from '../abis/Permissions.json'
-import { BrowserRouter as Router, Route} from "react-router-dom"
+import { BrowserRouter as Router,Redirect, Switch, Route,Link} from "react-router-dom";
 import Foother from './Footer'
 import Header from './Header'
 import Mrc from './Mrc'
+import ServiceProviderHome from './ServiceProviderHome'
 
 
 class App extends Component {
@@ -38,7 +39,7 @@ class App extends Component {
     if(networkData) {
       const permission = web3.eth.Contract(Permission.abi, networkData.address)
       this.setState({ permission })
-      this.setState({ loading: false})
+      this.setState({ loading: true})
     } else {
       window.alert('MrC contract not deployed to detected network.')
     }
@@ -48,26 +49,44 @@ class App extends Component {
     super(props)
     this.state = {
       account: '',
-      loading: true
+      loading: false,
+      serviceProvider: true
     }
   }
 
   render() {
 
     return (
+      <Router>
     <main>
       {
         this.state.loading
                 ? <div id="loader" className="text-center"><p className="text-center">You need to login...</p></div>
-                : <mean>
+                : <main>
                   <Header account={this.state.account} />
                     <br/><br/>
-                    <Mrc account={this.state.account} />
-                    <br/><br/><br/><br/>
+                    
+                   {this.state.serviceProvider 
+                   ?  
+                   <Switch>
+                    <Route path="/serviceProviderHome">
+                       <ServiceProviderHome account={this.state.account} />
+                    </Route>
+                    <Redirect to="/serviceProviderHome" />
+                   </Switch>
+
+                   : 
+                   <Route path="/patientHome" >
+                   <Mrc account={this.state.account} />
+                   </Route>
+                   }
+                   
+                   <br/><br/>
                   <Foother />
-                  </mean>
+                  </main>
       }
     </main>
+    </Router>
     );
   }
 }
