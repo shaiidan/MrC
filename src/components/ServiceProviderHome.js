@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
 import './ServiceProviderHome.css'
-import { BrowserRouter as Router, Switch, Route,Redirect} from "react-router-dom";
-import Mrc from './Mrc'
+import { Redirect} from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer'
+import Error from './Error'
+
 class ServiceProviderHome extends Component{
-    
+
+    componentWillMount() {
+        if(typeof this.props.location.state.account !== undefined &&
+                typeof this.props.location.state.patientAccount !== undefined){
+                    this.setState({patientAccount:this.props.location.state.patientAccount,
+                    account:this.props.location.state.account})
+        }
+        
+    }
+
     constructor(props) {
         super(props)
         this.state = {
+            account: '',
             permission:false,
+            patientAccount: '',
             hasError: false
         }
         this.searchOnClick = this.searchOnClick.bind(this)
@@ -15,18 +29,24 @@ class ServiceProviderHome extends Component{
     
     searchOnClick(){
         const search = document.getElementById('searchInput')
-        if(search !== undefined && search.value !== '' && search.value != '666'){
+        // check if have permission 
+        if(search !== undefined && search.value !== '' ){
             this.setState({ permission: true })
-            this.setState({permissionAccount: search.value})
+            this.setState({patientAccount: search.value})
         }
         else{
             this.setState({ permission: false })
+            window.alert("Sorry you don't have permission!")
         }
         search.value = ''
         
     }
     render() {
         return(
+            <main>
+                <Error>
+                <Header />
+                <br/><br/><br/>
               <div>
                   <h5 style={{textAlign: "center"}}>Searching patient by key</h5>
                   <div class="cover">
@@ -38,18 +58,16 @@ class ServiceProviderHome extends Component{
                   </div>
                   {this.state.permission 
                   ?  
-                  <Router>
-                   <Switch>   
-                    <Route path="/showPatientMrc">
-                        <br></br>
-                      <Mrc account={this.state.permissionAccount} />
-                    </Route>
-                    <Redirect to="/showPatientMrc" push="true"/>
-                  </Switch>
-                  </Router>
-                  
+                  <Redirect push to={{
+                    pathname: "/ShowPatientMrc",
+                    state: { patientAccount: this.state.patientAccount,
+                    account: this.state.account }
+                  }} />          
                   : null}
               </div>
+              <Footer/>
+              </Error>
+              </main>
           );
       }
 }

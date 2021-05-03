@@ -1,12 +1,24 @@
-const routes = require('next-routes')(); // the require returns a function. the second () is for invoking.
+import React from 'react';
+import {BrowserRouter as Router , Route} from 'react-router-dom';
+import App from './components/App';
+import ServiceProviderHome from './components/ServiceProviderHome'
+import UploadEmr from './components/UploadEmr'
+import ShowPatientMrc from './components/ShowPatientMrc'
+import Error from './components/Error'
+import PatientHome from './components/PatientHome'
 
-// Define a new route mapping
-// arguments: the pattern to look for, which route inside the page directory we want to display.
-routes
-    .add('/', '/index')
-    .add('/patientHome', '/patientHome')
-    .add('/serviceProviderHome', '/serviceProviderHome')
-    .add('/showPatientMrC', '/showPatientMrC')
-    .add('/uploadEmr', '/uploadEmr');
-    
-module.exports = routes;
+/**
+ * All routes go here.
+ * Don't forget to import the components above after adding new route.
+ */
+export default (
+    <Router>
+        <Route exact path="/" component={App} />
+        <Route path="/Error" component={Error} />
+        <Route path='PatientHome' component={PatientHome}/>
+        <Route path="/ServiceProviderHome" component={ServiceProviderHome}/>
+        <Route path="/UploadEmr" component={UploadEmr}/>   
+        <Route path="/ShowPatientMrc" component={ShowPatientMrc}/>
+        
+    </Router>
+);

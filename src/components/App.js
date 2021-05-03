@@ -5,8 +5,7 @@ import Permission from '../abis/Permissions.json'
 import { BrowserRouter as Router,Redirect, Switch, Route,Link} from "react-router-dom";
 import Foother from './Footer'
 import Header from './Header'
-import Mrc from './Mrc'
-import ServiceProviderHome from './ServiceProviderHome'
+import Error from './Error'
 
 
 class App extends Component {
@@ -39,7 +38,7 @@ class App extends Component {
     if(networkData) {
       const permission = web3.eth.Contract(Permission.abi, networkData.address)
       this.setState({ permission })
-      this.setState({ loading: true})
+      //this.setState({ loading: true})
     } else {
       window.alert('MrC contract not deployed to detected network.')
     }
@@ -57,36 +56,33 @@ class App extends Component {
   render() {
 
     return (
-      <Router>
+     
     <main>
+      <Error>
       {
         this.state.loading
                 ? <div id="loader" className="text-center"><p className="text-center">You need to login...</p></div>
                 : <main>
-                  <Header account={this.state.account} />
+                  <Header />
                     <br/><br/>
                     
                    {this.state.serviceProvider 
                    ?  
-                   <Switch>
-                    <Route path="/serviceProviderHome">
-                       <ServiceProviderHome account={this.state.account} />
-                    </Route>
-                    <Redirect to="/serviceProviderHome" />
-                   </Switch>
-
+                   <Redirect push to={{
+                    pathname: "/ServiceProviderHome",
+                    state: { account: this.state.account }
+                  }} />    
                    : 
-                   <Route path="/patientHome" >
-                   <Mrc account={this.state.account} />
-                   </Route>
+                   <Redirect to="/PatientHome" />
                    }
                    
                    <br/><br/>
                   <Foother />
+                
                   </main>
       }
+      </Error>
     </main>
-    </Router>
     );
   }
 }
