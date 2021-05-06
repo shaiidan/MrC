@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Web3 from 'web3'
 import './App.css'
 import Permission from '../abis/Permissions.json'
-import { BrowserRouter as Router,Redirect, Switch, Route,Link} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import Foother from './Footer'
 import Header from './Header'
 import Error from './Error'
@@ -33,12 +33,12 @@ class App extends Component {
     // Load account
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
+    localStorage.setItem('account',this.state.account)
     const networkId = await web3.eth.net.getId()
     const networkData = Permission.networks[networkId]
     if(networkData) {
       const permission = web3.eth.Contract(Permission.abi, networkData.address)
       this.setState({ permission })
-      //this.setState({ loading: true})
     } else {
       window.alert('MrC contract not deployed to detected network.')
     }
@@ -49,7 +49,7 @@ class App extends Component {
     this.state = {
       account: '',
       loading: false,
-      serviceProvider: true
+      serviceProvider: false
     }
   }
 
@@ -60,26 +60,25 @@ class App extends Component {
     <main>
       <Error>
       {
-        this.state.loading
-                ? <div id="loader" className="text-center"><p className="text-center">You need to login...</p></div>
-                : <main>
-                  <Header />
-                    <br/><br/>
-                    
-                   {this.state.serviceProvider 
-                   ?  
-                   <Redirect push to={{
-                    pathname: "/ServiceProviderHome",
-                    state: { account: this.state.account }
-                  }} />    
-                   : 
-                   <Redirect to="/PatientHome" />
-                   }
-                   
-                   <br/><br/>
-                  <Foother />
-                
-                  </main>
+        <main>
+          <Header />
+          <br/><br/>
+          {this.state.account == '' ?null : 
+          this.state.serviceProvider 
+          ?  
+           <Redirect push to={{
+             pathname: "/ServiceProviderHome",
+             state: { account: this.state.account }
+            }} />  
+            : 
+            <Redirect push to={{
+              pathname: "/PatientHome",
+              state: { account: this.state.account }
+             }} /> 
+            }
+            <br/><br/>
+            <Foother />
+            </main>
       }
       </Error>
     </main>

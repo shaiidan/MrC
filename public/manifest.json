@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MrC App",
+  "name": "Medical-records Chain",
   "icons": [
     {
       "src": "logo.ico",

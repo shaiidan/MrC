@@ -15,7 +15,7 @@ export default (
     <Router>
         <Route exact path="/" component={App} />
         <Route path="/Error" component={Error} />
-        <Route path='PatientHome' component={PatientHome}/>
+        <Route path='/PatientHome' component={PatientHome}/>
         <Route path="/ServiceProviderHome" component={ServiceProviderHome}/>
         <Route path="/UploadEmr" component={UploadEmr}/>   
         <Route path="/ShowPatientMrc" component={ShowPatientMrc}/>

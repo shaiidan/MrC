@@ -1,10 +1,8 @@
-import React from 'react';
+//import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css'
-import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import routes from './routes'
-
 
 
 ReactDOM.render(routes, document.getElementById('root'));

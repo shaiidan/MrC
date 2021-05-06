@@ -8,21 +8,29 @@ import Error from './Error'
 
 class ShowPatientMrc extends Component{
 
-    componentWillMount() {
-        if(typeof this.props.location.state.account !== undefined &&
-                typeof this.props.location.state.patientAccount !== undefined){
-                    this.setState({patientAccount:this.props.location.state.patientAccount,
-                    account:this.props.location.state.account})
-        }
-        
-    }
     constructor(props) {
         super(props)
         this.state = {
             account:'',
             patientAccount: ''
         }
+        this.startLoading = this.startLoading.bind(this)
     }
+    
+    componentWillMount() {
+        this.startLoading()
+    }
+    startLoading(){
+        const {pathname} = this.props.location;
+        if(pathname == '/ServiceProviderHome'){
+            if(typeof this.props.location.state.account !== undefined &&
+                typeof this.props.location.state.patientAccount !== undefined){
+                    this.setState({patientAccount:this.props.location.state.patientAccount,
+                        account:this.props.location.state.account})
+                    }
+                }
+    }
+    
 
     render(){
         return(

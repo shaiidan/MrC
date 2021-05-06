@@ -1,0 +1,34 @@
+
+
+.divForm{
+    margin: auto;
+    width: 50%;
+    border: 3px ;
+    padding: 10px;
+}
+
+.btn-upEmrSelect , .btn-upEmrSelect:hover{
+    background: #07051a;
+    color:white;
+   }
+.btn-upEmrSelectItems{
+    background: #07051a;
+    color:white;
+}
+.btn-upEmr{
+    background: #07051a;
+    width: 100%;
+    border: #07051a;
+    color:white;
+}
+
+.btn-upEmr:hover{   
+    background: #ff9900;
+}
+h2{
+    
+   color: #ff9900;
+}
+
+
+

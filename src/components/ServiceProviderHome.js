@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component  } from 'react'
 import './ServiceProviderHome.css'
 import { Redirect} from "react-router-dom";
 import Header from './Header';
@@ -7,26 +7,18 @@ import Error from './Error'
 
 class ServiceProviderHome extends Component{
 
-    componentWillMount() {
-        if(typeof this.props.location.state.account !== undefined &&
-                typeof this.props.location.state.patientAccount !== undefined){
-                    this.setState({patientAccount:this.props.location.state.patientAccount,
-                    account:this.props.location.state.account})
-        }
-        
-    }
 
     constructor(props) {
         super(props)
         this.state = {
-            account: '',
+            account: localStorage.getItem('account'),
             permission:false,
             patientAccount: '',
             hasError: false
         }
         this.searchOnClick = this.searchOnClick.bind(this)
       }
-    
+      
     searchOnClick(){
         const search = document.getElementById('searchInput')
         // check if have permission 
@@ -45,14 +37,16 @@ class ServiceProviderHome extends Component{
         return(
             <main>
                 <Error>
-                <Header />
+                <Header account={this.state.account}/>
                 <br/><br/><br/>
+                <h4 style={{paddingLeft:"40px",color:"#ff9900"}}>Hello {this.state.account}</h4>
+           
               <div>
                   <h5 style={{textAlign: "center"}}>Searching patient by key</h5>
-                  <div class="cover">
+                  <div className="cover">
                       <div className="divFrom" >     
                           <input type="search" id="searchInput" />
-                              <i class="fa fa-search"  
+                              <i className="fa fa-search"  
                               onClick={this.searchOnClick}></i>
                       </div>
                   </div>
