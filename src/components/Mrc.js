@@ -6,7 +6,7 @@ class Mrc extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            mrc: ["1"],
+            mrc: [],
             hasError: false
         }
       }
@@ -16,7 +16,7 @@ class Mrc extends Component {
         return( 
             <main>
                 <Error>
-            {this.state.mrc.length == 0 
+            {this.state.mrc.length === 0 
             ? <div className="text-center" style={{color:"orange", fontSize: "40px"}} ><b>Your MrC is empty!</b></div>
             :
             <div className="row" style={{padding: "40px", paddingRight: "100px"}}>  

@@ -31,7 +31,7 @@ class UploadEmr extends Component {
       const number = event.toString().split(",")[0]
       const value = event.toString().split(",")[1]
       this.setState({emrTypeValue: value})
-      if(number ==2){
+      if(number ===2){
         this.setState({prescriptions:true})
       }
       else{
@@ -40,7 +40,7 @@ class UploadEmr extends Component {
    
     }
     handleSelectedEmrStatus(event){
-      const number = event.toString().split(",")[0]
+      //const number = event.toString().split(",")[0]
       const value = event.toString().split(",")[1]
       this.setState({emrStatusValue: value})
     }
@@ -48,7 +48,7 @@ class UploadEmr extends Component {
       var fileName = event.target.value
       var idxDot = fileName.lastIndexOf(".") + 1;
       var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-      if (extFile=="pdf"){
+      if (extFile==="pdf"){
           
       }else{
           alert("Only pdf file are allowed!");
@@ -65,7 +65,7 @@ class UploadEmr extends Component {
                 <h2 className="text-center">Add a new EMR</h2><br/>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formID">
-                  <Form.Label>ID</Form.Label>
+                  <Form.Label>Address</Form.Label>
                   <Form.Control id="emrId"type="text" placeholder="Enter ID" required pattern="^[0-9]+$" />
                   </Form.Group>
                   <Dropdown as={ButtonGroup} onSelect={this.handleSelectedEmrType} >

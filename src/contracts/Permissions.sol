@@ -153,4 +153,16 @@ contract Permissions {
   function getServiceProviderPermissions() public view returns (address[] memory) {
     return serviceProvidersPermissions[msg.sender];
   }
+
+  function havePermission(address patient) public view returns(bool){
+    
+    bool hasPermission = false;
+    for(uint i; i< serviceProvidersPermissions[patient].length;i++){
+      if(msg.sender == serviceProvidersPermissions[patient][i]){
+        hasPermission = true;
+      }
+    }
+    
+    return hasPermission;
+  }
 } // end of contruct 

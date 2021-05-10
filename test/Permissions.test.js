@@ -22,8 +22,7 @@ contract('Permissions', ([patient, serviceProvider, dev]) => {
 
   describe('add serivce provider and new emr', async () => {
       let serviceProvidersBefore,serviceProvidersAfter, mrcPatient,mrcServiceProviderNot,mrcServiceProvider,
-      serviceProvidersRevoke, beforeRemove,resultsAdd, resultsPermission, resultsRemovePermission
-      
+      serviceProvidersRevoke, beforeRemove,resultsAdd, resultsPermission, resultsRemovePermission, hasPermission, hasPermissionNot
       before(async () => {    
         const time = new Date()
         
@@ -40,10 +39,12 @@ contract('Permissions', ([patient, serviceProvider, dev]) => {
         mrcServiceProvider = await permissions.getMrc(patient,{from:serviceProvider})
         mrcPatient = await permissions.getMrc(patient,{from:patient})
 
+        hasPermission = await permissions.havePermission(patient, {from:serviceProvider}) 
         //remove persmission
         beforeRemove = await permissions.getServiceProviderPermissions({ from: patient })
         resultsRemovePermission = await permissions.revokeAccessFromDoctor(serviceProvider,{from: patient})
         serviceProvidersRevoke = await permissions.getServiceProviderPermissions({ from: patient })
+        hasPermissionNot = await permissions.havePermission(patient, {from:serviceProvider})
       })
 
       it('add permission to service provider', async () => {
@@ -76,6 +77,11 @@ contract('Permissions', ([patient, serviceProvider, dev]) => {
         assert.equal(mrcServiceProvider[0].typeEmr,1,"type Emr is courrect")
         assert.equal(mrcServiceProvider[0].statusEmr,0,"type Emr is courrect")
         assert.equal(mrcServiceProvider[0].data,"testing","type Emr is courrect")  
+      })
+
+      it('check permission',async()=>{
+        assert.equal(hasPermission, true,"service provider has permission")
+        assert.equal(hasPermissionNot,false,"service provider has not permission")
       })
       
       it('remove service provider permission',async()=>{

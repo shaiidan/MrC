@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import './App.css'
-import Permission from '../abis/Permissions.json'
+import Permissions from '../abis/Permissions.json'
 import {Redirect} from "react-router-dom";
-import Foother from './Footer'
-import Header from './Header'
 import Error from './Error'
 
 
@@ -35,10 +33,12 @@ class App extends Component {
     this.setState({ account: accounts[0] })
     localStorage.setItem('account',this.state.account)
     const networkId = await web3.eth.net.getId()
-    const networkData = Permission.networks[networkId]
+    const networkData = Permissions.networks[networkId]
     if(networkData) {
-      const permission = web3.eth.Contract(Permission.abi, networkData.address)
-      this.setState({ permission })
+      const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
+      this.setState({ permissions })
+      localStorage.setItem('permissions',this.state.permissions)
+      this.setState({ loading: false})
     } else {
       window.alert('MrC contract not deployed to detected network.')
     }
@@ -48,40 +48,34 @@ class App extends Component {
     super(props)
     this.state = {
       account: '',
-      loading: false,
-      serviceProvider: false
+      serviceProvider: false,
+      loading:true
     }
   }
 
   render() {
 
     return (
-     
-    <main>
+    <>
       <Error>
-      {
-        <main>
-          <Header />
-          <br/><br/>
-          {this.state.account == '' ?null : 
+        {this.state.loading ?null 
+        :
+          this.state.account === '' ?<div><h4>Loading......</h4></div> :
+          
           this.state.serviceProvider 
           ?  
            <Redirect push to={{
              pathname: "/ServiceProviderHome",
-             state: { account: this.state.account }
+             state: {}
             }} />  
-            : 
+          : 
             <Redirect push to={{
               pathname: "/PatientHome",
-              state: { account: this.state.account }
+              state: {}
              }} /> 
-            }
-            <br/><br/>
-            <Foother />
-            </main>
       }
       </Error>
-    </main>
+    </>
     );
   }
 }

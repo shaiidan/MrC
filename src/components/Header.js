@@ -1,18 +1,19 @@
 import React, {Component} from 'react'
+import { Link} from "react-router-dom";
 const logo_profile = require("../images/profile_icon.png")
 const logo = require("../images/logo_with_title.png")
+
 class Header extends Component{
 
-    constructor(props) {
-        super(props)
-    }
     
     render(){
         return(
             <nav style={{borderBottom:"3px solid #7f7f7f"}}  className="navbar navbar-light" >
-                <a href="javascript:windows.location.reload(true)"><img src={logo} width="300px" height="120px" class="d-inline-block align-top" alt=""/></a>
+            
+                <Link to="/"><img src={logo} width="300px" height="120px" className="d-inline-block align-top" alt=""/>
+                </Link>
                 {typeof this.props.account !== undefined ?
-                <div class="btn-group">
+                <div className="btn-group">
                     <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src={logo_profile}  width="35px" height="35px" className="d-inline-block align-top" alt="" /> 
                         </button>
