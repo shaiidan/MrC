@@ -10,7 +10,7 @@ import Permissions from '../abis/Permissions.json'
 
 class ServiceProviderHome extends Component{
     
-  async componentWillMount() {
+  async componentDidMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
   }
@@ -56,7 +56,7 @@ class ServiceProviderHome extends Component{
     async checkPermission(){
         if(this.state.patientAccount !== "" && this.state.patientAccount !== undefined){         
             if(Web3.utils.isAddress(this.state.patientAccount)){
-                const check  = await this.state.permissions.methods.havePermission(this.state.patientAccount).call()
+                const check  = await this.state.permissions.methods.havePermission(this.state.patientAccount).call({from:this.state.account})
                 if(check){
                     this.setState({hasPermission:true})
                 }

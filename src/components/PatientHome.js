@@ -8,10 +8,11 @@ import Mrc from './Mrc'
 import Error from './Error'
 import Web3 from 'web3'
 import Permissions from '../abis/Permissions.json'
+import deleteIcon from '../images/delete_icon.jpg'
 
 class PatientHome extends Component{
     
-    async componentWillMount() {
+    async componentDidMount() {
         await this.loadWeb3()
         await this.loadBlockchainData()
       }
@@ -41,10 +42,19 @@ class PatientHome extends Component{
           const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
           this.setState({ permissions })
           localStorage.setItem('permissions',this.state.permissions)
+          await this.loadingMrC()
           this.setState({ loading: false})
         } else {
           window.alert('MrC contract not deployed to detected network.')
         }
+      }
+      async loadingMrC(){
+          // get all service providers have permission
+          const accessList = await this.state.permissions.methods.getServiceProviderPermissions().call({"from":this.state.account})
+          this.setState({accessList})
+          // get the mrc of this patient
+          const mrc = await this.state.permissions.methods.getMrc(this.state.account).call({from:this.state.account})
+          this.setState({mrc})
       }
    
     constructor(props) {
@@ -54,13 +64,42 @@ class PatientHome extends Component{
             hasError: false,
             loading:true
         }
+        this.removeAccess = this.removeAccess.bind(this)
+        this.loadingMrC = this.loadingMrC.bind(this)
     }
 
-    addAccessToServiceProvider(address){
+    async addAccessToServiceProvider(backToComponent,address){
         console.log(address)
+        /*
+        backToComponent.setState({ loading: true })
+        backToComponent.state.permissions.methods.giveAccessToServiceProvider(address)
+        .send({from:backToComponent.state.account,gas:0})
+        .once('error', (error) => {
+            backToComponent.setState({ hasError: true })
+        })
+        .once('confirmation', (confirmation) => {
+            backToComponent.loadingMrC() // update mrc
+            backToComponent.setState({ loading: false })
+        })   
+        */
     }
 
-    
+    async removeAccess(address){
+        console.log(address)
+        // revoke this address
+        /*
+        this.setState({ loading: true })
+        this.state.permissions.methods.revokeAccessFromDoctor(address)
+        .send({from:this.state.account,gas:0})
+        .once('error', (error) => {
+            this.setState({ hasError: true })
+        })
+        .once('confirmation', (confirmation) => {
+            this.loadingMrC() // update mrc
+            this.setState({ loading: false })
+        })
+        */   
+    }
 
     render(){
         return(
@@ -76,8 +115,15 @@ class PatientHome extends Component{
                 <Mrc mrc= {this.state.mrc}/>
                 <br/><br/>
                 <div style={{paddingLeft:"40px"}}>
-                    <h4>Access to service providers</h4><br/>
-                    <AccessToServiceProvider onAddAccessToServiceProvider={this.addAccessToServiceProvider} />
+                    <h4>Access to service providers</h4>
+                    <AccessToServiceProvider backToComponent={this} onAddAccessToServiceProvider={this.addAccessToServiceProvider} />
+                    <br/>
+                {
+                    this.state.accessList.map(access =>{
+                        return <b key={access}>{access.toString()}<span>    </span> 
+                              <img src={deleteIcon} width="20px" height="20px"  onClick={() => this.removeAccess(access)} alt=""/></b> 
+                    })
+                }
                 </div>
                 <br/><br/>
                 <Footer />
@@ -93,45 +139,48 @@ class PatientHome extends Component{
 function AccessToServiceProvider(props) {
   const [show, setShow] = useState(false)
   const [state,setState] = useState("")
+ // const [errorMsg,setErrorMsg] = useState("")
+  //const [hasError,setHasError] = useState(true)
 
-  const handleClose = () =>{ 
-      setShow(false)
-      // check state
-      if(state !== undefined && state !== ""){
-          props.onAddAccessToServiceProvider(state)
-          setState("")
-      }
-  }
   const handleShow = () => {
       setShow(true)
       setState("")
+  }
+  const handleSubmit = () =>{
+      console.log("ssssssssss")
+      setShow(false)
+      // check state
+      if(state !== undefined && state !== ""){
+        props.onAddAccessToServiceProvider(props.backToComponent,state)
+        setState("")
     }
+  }
   const handleChange = (event) =>{
       setState(event.target.value)
   }
 
   return (
     <>
-      <Form.Label style={{color:"blue"}} onClick={handleShow}>
+      <span style={{color:"blue"}} onClick={handleShow}>
         Add a new access
-      </Form.Label>
+      </span>
       <br/>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={() => setShow(false)} >
+        <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>Add access</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form.Label>Address</Form.Label>
-            <Form.Control value={state} onChange={handleChange} type="text" placeholder="Enter address" required />
+            <Form.Control value={state} onChange={handleChange} type="text" 
+             placeholder="Enter address" required pattern="0x[a-f-A-F0-9]{40}$"
+             onInvalid={(event) =>  event.target.setCustomValidity("Accout address is incorrect!")}/>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose} >
+          <Button type="submit"  variant="primary">
             Save Changes
           </Button>
         </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );

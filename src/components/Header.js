@@ -1,10 +1,16 @@
 import React, {Component} from 'react'
 import { Link} from "react-router-dom";
+import Web3 from "web3"
 const logo_profile = require("../images/profile_icon.png")
 const logo = require("../images/logo_with_title.png")
 
 class Header extends Component{
 
+    signOut(){
+        if(this.props.account !== undefined){
+            Web3.eth.accounts.wallet.remove(this.props.account);
+        }
+    }
     
     render(){
         return(
@@ -20,8 +26,7 @@ class Header extends Component{
                         <div className="dropdown-menu dropdown-menu-right">
                             <div >Signed in as <b>{this.props.account}</b></div>
           
-              <button className="dropdown-item" type="button">Your profile</button>
-              <button className="dropdown-item" type="button">Sign out</button>
+              <button className="dropdown-item" type="button" onClick={this.signOut}>Sign out</button>
             </div>
             </div>
             :null}

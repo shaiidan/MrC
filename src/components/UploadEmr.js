@@ -66,7 +66,7 @@ class UploadEmr extends Component {
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formID">
                   <Form.Label>Address</Form.Label>
-                  <Form.Control id="emrId"type="text" placeholder="Enter ID" required pattern="^[0-9]+$" />
+                  <Form.Control id="emrId"type="text" placeholder="Enter ID" required/>
                   </Form.Group>
                   <Dropdown as={ButtonGroup} onSelect={this.handleSelectedEmrType} >
                     <Button variant="upEmrSelect">EMR type</Button>
