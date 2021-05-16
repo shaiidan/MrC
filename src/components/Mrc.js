@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import Error from './Error'
 
 class Mrc extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            mrc: [],
-            hasError: false
-        }
-      }
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      mrc: [],
+      accountShow: this.props.accountShow,
+      hasError: false
+    }
+  }
 
     render(){
         
@@ -17,7 +18,7 @@ class Mrc extends Component {
             <main>
                 <Error>
             {this.state.mrc.length === 0 
-            ? <div className="text-center" style={{color:"orange", fontSize: "40px"}} ><b>Your MrC is empty!</b></div>
+            ? <div className="text-center" style={{color:"orange", fontSize: "30px"}} ><b>MrC is empty!</b></div>
             :
             <div className="row" style={{padding: "40px", paddingRight: "100px"}}>  
     <div className="col-3">

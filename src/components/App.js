@@ -48,7 +48,7 @@ class App extends Component {
     super(props)
     this.state = {
       account: '',
-      serviceProvider: false,
+      serviceProvider: true,
       loading:true
     }
   }

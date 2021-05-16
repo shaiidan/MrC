@@ -48,6 +48,7 @@ class PatientHome extends Component{
           window.alert('MrC contract not deployed to detected network.')
         }
       }
+      
       async loadingMrC(){
           // get all service providers have permission
           const accessList = await this.state.permissions.methods.getServiceProviderPermissions().call({"from":this.state.account})
@@ -69,8 +70,6 @@ class PatientHome extends Component{
     }
 
     async addAccessToServiceProvider(backToComponent,address){
-        console.log(address)
-        /*
         backToComponent.setState({ loading: true })
         backToComponent.state.permissions.methods.giveAccessToServiceProvider(address)
         .send({from:backToComponent.state.account,gas:0})
@@ -81,13 +80,10 @@ class PatientHome extends Component{
             backToComponent.loadingMrC() // update mrc
             backToComponent.setState({ loading: false })
         })   
-        */
     }
 
     async removeAccess(address){
-        console.log(address)
         // revoke this address
-        /*
         this.setState({ loading: true })
         this.state.permissions.methods.revokeAccessFromDoctor(address)
         .send({from:this.state.account,gas:0})
@@ -98,7 +94,6 @@ class PatientHome extends Component{
             this.loadingMrC() // update mrc
             this.setState({ loading: false })
         })
-        */   
     }
 
     render(){
@@ -139,15 +134,12 @@ class PatientHome extends Component{
 function AccessToServiceProvider(props) {
   const [show, setShow] = useState(false)
   const [state,setState] = useState("")
- // const [errorMsg,setErrorMsg] = useState("")
-  //const [hasError,setHasError] = useState(true)
 
   const handleShow = () => {
       setShow(true)
       setState("")
   }
   const handleSubmit = () =>{
-      console.log("ssssssssss")
       setShow(false)
       // check state
       if(state !== undefined && state !== ""){

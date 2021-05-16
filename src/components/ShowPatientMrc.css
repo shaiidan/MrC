@@ -22,6 +22,12 @@
     color:white;
 }
 
+.btn-submit{
+    background: #07051a;
+    width: 100%;
+    border: #07051a;
+    color:white;
+}
 .btn-upEmr:hover{   
     background: #ff9900;
 }

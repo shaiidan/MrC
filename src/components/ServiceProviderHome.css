@@ -45,7 +45,7 @@ input[type=search]{
 }
 
 .divFrom:hover{
-    width: 200px;
+    width: 50%;
     cursor: pointer;
 }
 
