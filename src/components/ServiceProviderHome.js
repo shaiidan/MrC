@@ -60,13 +60,11 @@ class ServiceProviderHome extends Component{
       if(account !== "" && account !== undefined){       
         this.setState({ loading: true }) 
         const check  = await this.state.permissions.methods.havePermission(account).call({from:this.state.account})
-        this.setState({ loading: false })
         this.setState({loadingPatient:false})
         if(check){
           this.setState({hasPermission:true})
           localStorage.setItem('patientAccount',account)
-          await this.setState({patientAccount:localStorage.getItem('patientAccount')})
-          console.log(this.state.patientAccount)
+          this.setState({patientAccount:localStorage.getItem('patientAccount')})
         }
         else{
           window.alert("Sorry! you don't have permission!!")
@@ -74,9 +72,9 @@ class ServiceProviderHome extends Component{
         }
       }
       else{
-        this.setState({loadingPatient:false})
         window.alert("Sorry! something wrong happened")
       }
+      this.setState({ loading: false }) // loading finish
     }
       
     async searchPatient(){

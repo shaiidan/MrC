@@ -1,28 +1,75 @@
 import React, { Component } from 'react'
 import Error from './Error'
+import Encription from '../Encription'
 
 class Mrc extends Component {
-  
+ 
   constructor(props) {
     super(props)
     this.state = {
-      mrc: [],
+      mrc: this.props.mrc,
       accountShow: this.props.accountShow,
+      keyAccount: 'dd7d78dafbd161a73400b076af946b5cb61f0c6875ba0e3c75ff17ac518a29b1',
       hasError: false
     }
+    this.filterMrc = this.filterMrc.bind(this)
+  }
+  async filterMrc(){
+    const mrcFilter = {
+      LABORATORY_TEST_RESULTS: [],
+      REFERENCES: [],
+      MEDICATIONS_AND_PRESCRIPTIONS: [],
+      IMAGING_TEST_RESULTS:[],
+      YOUR_DIAGNOSES: [],
+      YOUR_SENSITIVITY: [],
+      THE_VACCINES_YOU_DID: [],
+      MEDICAL_RECOMMENDATIONS: [],
+      CERTIFICATES_OF_ILLNESS:[],
+      MEDICAL_INFORMATION_SUMMARY:[]
+    }
+    this.state.mrc.forEach(function (emr, index) {
+      switch(emr.TypeEmr){
+        case 0:{  mrcFilter.LABORATORY_TEST_RESULTS.push(emr); break; }
+        case 1:{  mrcFilter.REFERENCES.push(emr); break; }
+        case 2:{  mrcFilter.MEDICATIONS_AND_PRESCRIPTIONS.push(emr); break; }
+        case 3:{  mrcFilter.IMAGING_TEST_RESULTS.push(emr); break; }
+        case 4:{  mrcFilter.YOUR_DIAGNOSES.push(emr); break; }
+        case 5:{  mrcFilter.YOUR_SENSITIVITY.push(emr); break; }
+        case 6:{  mrcFilter.THE_VACCINES_YOU_DID.push(emr); break; }
+        case 7:{  mrcFilter.MEDICAL_RECOMMENDATIONS.push(emr); break; }
+        case 8:{  mrcFilter.CERTIFICATES_OF_ILLNESS.push(emr); break; }
+        case 9:{  mrcFilter.MEDICAL_INFORMATION_SUMMARY.push(emr); break; }
+        default:{}
+      }
+    });
+    return mrcFilter
+  }
+
+  addRow(emr){
+    const h = Encription.decrypt(emr.data,this.state.keyAccount)
+    console.log(this.state.keyAccount)
+    const fileName = "EMR-" + emr.time +".txt" 
+    if(h === '' || h === undefined){
+      return null;
+    }
+    return(
+      <tr key={emr.emrId}>
+      <td>{emr.time}</td>
+      <td><a href={h} download={fileName}>Download</a></td>
+    </tr>
+    );
   }
 
     render(){
-        
         return( 
-            <main>
-                <Error>
-            {this.state.mrc.length === 0 
-            ? <div className="text-center" style={{color:"orange", fontSize: "30px"}} ><b>MrC is empty!</b></div>
-            :
+        <>
+        <Error>
+          {this.state.mrc.length === 0 
+          ? <div className="text-center" style={{color:"orange", fontSize: "30px"}} ><b>MrC is empty!</b></div>
+          :
             <div className="row" style={{padding: "40px", paddingRight: "100px"}}>  
-    <div className="col-3">
-        <div style={{border: "#ff9900 solid 3px"}} className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" >
+            <div className="col-3">
+              <div style={{border: "#ff9900 solid 3px"}} className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" >
             <a className="nav-link active" id="v-pills-laboratory-test-results-tab" data-toggle="pill" href="#v-pills-laboratory-test-results" role="tab" aria-controls="v-pills-laboratory-test-results" aria-selected="true">Laboratory test results</a>
             <a className="nav-link" id="v-pills-references-tab" data-toggle="pill" href="#v-pills-references" role="tab" aria-controls="v-pills-references" aria-selected="false">References</a>
             <a className="nav-link" id="v-pills-medications-and-prescriptions-tab" data-toggle="pill" href="#v-pills-medications-and-prescriptions" role="tab" aria-controls="v-pills-medications-and-prescriptions" aria-selected="false">Medications and prescriptions</a>
@@ -38,19 +85,22 @@ class Mrc extends Component {
     <div className="col-9">
         <div className="tab-content" id="v-pills-tabContent">
           <div  style={{width: "70%" ,paddingLeft: "40px"}} className="tab-pane fade show active" id="v-pills-laboratory-test-results" role="tabpanel" aria-labelledby="v-pills-v-pills-laboratory-test-results-tab">
-      
         <table 
           id="table"
+          className="table"
           data-toggle="table"
-          data-toolbar=".toolbar">
+          data-flat="true"
+          data-search="true">
             <thead>
               <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+                <th data-field="date"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
             <tbody>
-
+              {this.state.mrc.map(emr=>{
+                return(this.addRow(emr));
+              })}
             </tbody>
             </table>
           </div>
@@ -80,6 +130,7 @@ class Mrc extends Component {
               <tr>
                 <th data-field="date"  data-sortable="true" >Date</th>
                 <th data-field="file" >File</th>
+                <th data-field="status">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -208,7 +259,7 @@ class Mrc extends Component {
 }
 <br/><br/>
             </Error>
-            </main>
+            </>
         );
     }
 }

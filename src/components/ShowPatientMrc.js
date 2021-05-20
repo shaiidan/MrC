@@ -11,6 +11,9 @@ import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import './ShowPatientMrc.css'
 import Web3 from 'web3'
+import Permissions from '../abis/Permissions.json'
+import Encription from '../Encription'
+
 
 
 class ShowPatientMrc extends Component {
@@ -19,8 +22,7 @@ class ShowPatientMrc extends Component {
         this.setState({account:localStorage.getItem('account'),
         patientAccount:localStorage.getItem('patientAccount') })
         await this.loadWeb3()
-        await this.loadBlockchainData()
-      
+        await this.loadBlockchainData()      
     }
     async loadWeb3() {
         if (window.ethereum) {
@@ -43,74 +45,106 @@ class ShowPatientMrc extends Component {
         if(networkData) {
           const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
           this.setState({ permissions })
-          this.setState({ loading: false })
+          await this.loadingMrC()
+          this.setState({ loading: false }) // show
         } else {
           window.alert('MrC contract not deployed to detected network.')
         }
       }
+      async loadingMrC(){
+        // get the mrc of this patient
+        const mrc = await this.state.permissions.methods.getMrc(this.state.patientAccount)
+        .call({from:this.state.account})
+        this.setState({mrc})
+    }
 
     constructor(props) {
         super(props)
         this.state = {
+          loading: true,
             account: '',
-            loading: true,
             patientAccount: ''
         }
-        this.addEmr = this.addEmr.bind(this)
-    }
-
-    async addEmr(details){
-        this.setState({ loading: true })
-        await this.state.permissions.methods.addEmr(this.state.patientAccount,
-            details.typeEmr,details.statuseEmr,details.time,details.data)
-            .send({from:this.state.account})
-            .once('error', (error) => {
-                this.setState({ hasError: true })
-            })
-            .once('confirmation', (confirmation) => {
-                this.setState({ loading: false })
-            })
     }
 
     render(){
         return(
-            <main>
+            <>
                 <Error>
                 {
                 this.state.loading ? <div>Loading...</div> :
                 <>
+                <AddPrivateKey  parent ={this} />
                 <Header account={this.state.account} />
                 <div style={{padding:'40px'}}>
                 <div><b id="mrcOf" style={{fontSize:"20px", paddingLeft:"20px" }}>MrC of {this.state.patientAccount}</b></div>
                 <br/>
-                <UploadEmr addEmr={this.addEmr}/>
+                <UploadEmr parent={this}/>
                 </div>
-              <Mrc accountShow={this.patientAccount}/>
+              <Mrc  accountShow={this.patientAccount}   mrc= {this.state.mrc} accountKey={this.state.patientPrivateKey}/>
             <br></br>
             <Foother/>
             </>
             }
             </Error>
-            </main>
+            </>
         );
     }
 }
 
+function AddPrivateKey(props) {
+  const [show, setShow] = useState(true)
+  const [privateKey, setPrivateKey] = useState("")
+  
+  const handleChange = (event) =>{
+    setPrivateKey(event.target.value)
+  }
+  const handleSubmit = (event)=>{
+    event.preventDefault()
+    props.parent.setState({patientPrivateKey:privateKey})
+    setShow(false)
+  }
+  return (
+    <>
+    <Modal show={show} onHide={() => null} >
+        <Form onSubmit={handleSubmit}>
+        <Modal.Header>
+          <Modal.Title>Add private key</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form.Control value={privateKey} onChange={handleChange} type="text" 
+             placeholder="Enter private key of this patient" required pattern="[a-fA-F0-9]{64}$"
+             onInvalid={(event) =>  event.target.setCustomValidity("Private key is incorrect!")}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button type="submit"  variant="primary">
+            Save Changes
+          </Button>
+        </Modal.Footer>
+        </Form>
+      </Modal>
+    </>
+  );
+}
 
 function UploadEmr(props) {
     const [show, setShow] = useState(false)
     const [emrTypeValue, setEmrTypeValue] = useState("")
+    const [keyType, setKeyType] = useState(0)
+    const [keyStatus, setKeyStatus] = useState(0)
     const [prescriptions, setPrescriptions] = useState(false)
-    const [emrStatusValue,setEmrStatusValue] = useState("")
+    const [emrStatusValue,setEmrStatusValue] = useState("VALID")
+    const [file, setFile] = useState("")
 
     const handleShow = () => {
         setShow(true)
     }
     const handleSelectedEmrType = (event) => {
-        const number = event.toString().split(",")[0]
+        const key = event.toString().split(",")[0]
         const value = event.toString().split(",")[1]
         setEmrTypeValue(value)
-        if(parseInt(number) === 2){
+        setKeyType(key)
+        if(parseInt(key) === 2){
             setPrescriptions(true)
         }
         else{
@@ -118,25 +152,49 @@ function UploadEmr(props) {
         }
     }
     const handleSelectedEmrStatus = (event) => {
-        const value = event.toString().split(",")[1]
-        setEmrStatusValue(value)
+      const key = event.toString().split(",")[0] 
+      const value = event.toString().split(",")[1]
+      setEmrStatusValue(value)
+      setKeyStatus(key)
     }
     const validateFileType = (event) => {
         var fileName = event.target.value
         var idxDot = fileName.lastIndexOf(".") + 1;
         var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-        if (extFile!=="pdf"){
-            alert("Only pdf file are allowed!");
+        if (extFile!=="txt"){
+            alert("Only txt file are allowed!");
             event.target.value = null
-        }   
-    }
-    const  handleSubmit = async () =>{
-        const details = {
-
         }
-        await props.addEmr(details)
+        else{
+          setFile(event.target.files[0])
+        }
     }
-
+    const handleSubmit = async (event) =>{
+      event.preventDefault()
+      setShow(false)
+      const base64Data = await toBase64(file)
+      const details = {
+          typeEmr: parseInt(keyType),
+          statuseEmr: parseInt(keyStatus),
+          time: new Date().toLocaleString(),
+          owner: props.parent.state.patientAccount,
+          writer: props.parent.state.account,
+          data: Encription.encrypt(base64Data,props.parent.state.patientPrivateKey) 
+      }
+      // save in blockaing!!
+      props.parent.setState({ loading: true })
+      await props.parent.state.permissions.methods.addEmr(details.owner,
+            details.typeEmr,details.statuseEmr,details.time,
+            details.data)
+            .send({from: details.writer})
+            .once('error', (error) => {
+              props.parent.setState({ hasError: true })
+              console.log(error)
+            })
+            .once('confirmation', (confirmation) => {
+              props.parent.setState({ loading: false })
+            })
+    }
     return (
         <>
         <div style={{paddingLeft:"40px",color:"blue"}} onClick={handleShow}>
@@ -144,7 +202,6 @@ function UploadEmr(props) {
           <b>Add a new EMR</b>
         </div>
         <Modal show={show} onHide={() => setShow(false)} >
-        <Form onSubmit={handleSubmit}>
             <Modal.Header closeButton>
                 <Modal.Title>Add a new EMR</Modal.Title>
             </Modal.Header>
@@ -186,20 +243,25 @@ function UploadEmr(props) {
                     <Form.Group>
                       {prescriptions ? <br/> : null}
                     <Form.Label>Add file</Form.Label>
-                      <Form.Control id="emrFile" type="file" placeholder="Upload File" accept=".pdf" onChange={validateFileType} />
+                      <Form.Control id="emrFile" type="file" placeholder="Upload File" accept=".txt" onChange={validateFileType} />
                     </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-          <Button  type="submit"  variant="submit">
+          <Button  type="button"  variant="submit" onClick={handleSubmit}>
             Add
           </Button>
         </Modal.Footer>
-        </Form>
         </Modal>
         </>
     );
 }
 
-
+// convet file to base64
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
 
 export default ShowPatientMrc;

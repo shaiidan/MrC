@@ -41,7 +41,6 @@ class PatientHome extends Component{
         if(networkData) {
           const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
           this.setState({ permissions })
-          localStorage.setItem('permissions',this.state.permissions)
           await this.loadingMrC()
           this.setState({ loading: false})
         } else {
@@ -72,7 +71,7 @@ class PatientHome extends Component{
     async addAccessToServiceProvider(backToComponent,address){
         backToComponent.setState({ loading: true })
         backToComponent.state.permissions.methods.giveAccessToServiceProvider(address)
-        .send({from:backToComponent.state.account,gas:0})
+        .send({from:backToComponent.state.account})
         .once('error', (error) => {
             backToComponent.setState({ hasError: true })
         })
@@ -107,7 +106,7 @@ class PatientHome extends Component{
                 <br/><br/><br/>
                 <h4 style={{paddingLeft:"40px",color:"#ff9900"}}>Hello {this.state.account}</h4>
                 <br/>
-                <Mrc mrc= {this.state.mrc}/>
+                <Mrc accountShow={this.state.account} mrc= {this.state.mrc} accountKey= {this.state.privateKey}/>
                 <br/><br/>
                 <div style={{paddingLeft:"40px"}}>
                     <h4>Access to service providers</h4>
@@ -115,8 +114,8 @@ class PatientHome extends Component{
                     <br/>
                 {
                     this.state.accessList.map(access =>{
-                        return <b key={access}>{access.toString()}<span>    </span> 
-                              <img src={deleteIcon} width="20px" height="20px"  onClick={() => this.removeAccess(access)} alt=""/></b> 
+                        return (<b key={access}>{access.toString()}<span>    </span> 
+                              <img src={deleteIcon} width="20px" height="20px"  onClick={() => this.removeAccess(access)} alt=""/></b>) 
                     })
                 }
                 </div>
@@ -164,7 +163,7 @@ function AccessToServiceProvider(props) {
         </Modal.Header>
         <Modal.Body>
             <Form.Control value={state} onChange={handleChange} type="text" 
-             placeholder="Enter address" required pattern="0x[a-f-A-F0-9]{40}$"
+             placeholder="Enter address" required pattern="0x[a-fA-F0-9]{40}$"
              onInvalid={(event) =>  event.target.setCustomValidity("Accout address is incorrect!")}/>
         </Modal.Body>
         <Modal.Footer>
