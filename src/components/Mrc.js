@@ -1,61 +1,40 @@
 import React, { Component } from 'react'
 import Error from './Error'
 import Encription from '../Encription'
+import { Redirect } from 'react-router'
 
 class Mrc extends Component {
- 
+
+  componentDidMount() {
+    if( this.state.mrc === undefined || this.state.accountKey === undefined 
+      || this.state.accountShow === undefined){
+        this.setState({hasError:true})
+        // go to error!!
+      }
+  }
   constructor(props) {
     super(props)
     this.state = {
       mrc: this.props.mrc,
       accountShow: this.props.accountShow,
-      keyAccount: 'dd7d78dafbd161a73400b076af946b5cb61f0c6875ba0e3c75ff17ac518a29b1',
+      accountKey: this.props.accountKey,
+     // keyAccount: 'dd7d78dafbd161a73400b076af946b5cb61f0c6875ba0e3c75ff17ac518a29b1',
       hasError: false
-    }
-    this.filterMrc = this.filterMrc.bind(this)
+    }  
   }
-  async filterMrc(){
-    const mrcFilter = {
-      LABORATORY_TEST_RESULTS: [],
-      REFERENCES: [],
-      MEDICATIONS_AND_PRESCRIPTIONS: [],
-      IMAGING_TEST_RESULTS:[],
-      YOUR_DIAGNOSES: [],
-      YOUR_SENSITIVITY: [],
-      THE_VACCINES_YOU_DID: [],
-      MEDICAL_RECOMMENDATIONS: [],
-      CERTIFICATES_OF_ILLNESS:[],
-      MEDICAL_INFORMATION_SUMMARY:[]
-    }
-    this.state.mrc.forEach(function (emr, index) {
-      switch(emr.TypeEmr){
-        case 0:{  mrcFilter.LABORATORY_TEST_RESULTS.push(emr); break; }
-        case 1:{  mrcFilter.REFERENCES.push(emr); break; }
-        case 2:{  mrcFilter.MEDICATIONS_AND_PRESCRIPTIONS.push(emr); break; }
-        case 3:{  mrcFilter.IMAGING_TEST_RESULTS.push(emr); break; }
-        case 4:{  mrcFilter.YOUR_DIAGNOSES.push(emr); break; }
-        case 5:{  mrcFilter.YOUR_SENSITIVITY.push(emr); break; }
-        case 6:{  mrcFilter.THE_VACCINES_YOU_DID.push(emr); break; }
-        case 7:{  mrcFilter.MEDICAL_RECOMMENDATIONS.push(emr); break; }
-        case 8:{  mrcFilter.CERTIFICATES_OF_ILLNESS.push(emr); break; }
-        case 9:{  mrcFilter.MEDICAL_INFORMATION_SUMMARY.push(emr); break; }
-        default:{}
-      }
-    });
-    return mrcFilter
-  }
-
-  addRow(emr){
-    const h = Encription.decrypt(emr.data,this.state.keyAccount)
-    console.log(this.state.keyAccount)
+  
+  // add row to table - emr 
+  addRow(emr,status=false){
+    const h = Encription.decrypt(emr.data,this.state.accountKey)
     const fileName = "EMR-" + emr.time +".txt" 
-    if(h === '' || h === undefined){
+    if(h === '' || h === undefined || h === null){
       return null;
     }
     return(
-      <tr key={emr.emrId}>
+    <tr key={emr.emrId}>
       <td>{emr.time}</td>
       <td><a href={h} download={fileName}>Download</a></td>
+      {status ? <td>emr.StatusEmr</td> : null}
     </tr>
     );
   }
@@ -64,7 +43,8 @@ class Mrc extends Component {
         return( 
         <>
         <Error>
-          {this.state.mrc.length === 0 
+          {this.state.hasError ? <Redirect to="/Error" /> :
+          this.state.mrc.length === 0 
           ? <div className="text-center" style={{color:"orange", fontSize: "30px"}} ><b>MrC is empty!</b></div>
           :
             <div className="row" style={{padding: "40px", paddingRight: "100px"}}>  
@@ -99,7 +79,10 @@ class Mrc extends Component {
             </thead>
             <tbody>
               {this.state.mrc.map(emr=>{
-                return(this.addRow(emr));
+                if(emr.typeEmr === 0){
+                  return(this.addRow(emr));
+                }
+                return null
               })}
             </tbody>
             </table>
@@ -117,7 +100,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 1){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table> 
           </div>
@@ -134,7 +123,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 2){
+                  return(this.addRow(emr,true));
+                }
+                return null
+              })}
             </tbody>
             </table>
         </div>
@@ -150,7 +145,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 3){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>
           </div>
@@ -166,7 +167,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 4){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>
           </div>
@@ -182,7 +189,12 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 5){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>
           
@@ -200,7 +212,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 6){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>          
           </div>
@@ -216,7 +234,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 7){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>
           </div>
@@ -232,7 +256,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 8){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>
           
@@ -249,7 +279,13 @@ class Mrc extends Component {
               </tr>
             </thead>
             <tbody>
-
+              
+            {this.state.mrc.map(emr=>{
+                if(emr.typeEmr === 9){
+                  return(this.addRow(emr));
+                }
+                return null
+              })}
             </tbody>
             </table>
             </div>

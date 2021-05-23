@@ -15,9 +15,13 @@ class Header extends Component{
     render(){
         return(
             <nav style={{borderBottom:"3px solid #7f7f7f"}}  className="navbar navbar-light" >
-            
-                <Link to="/"><img src={logo} width="300px" height="120px" className="d-inline-block align-top" alt=""/>
+                {typeof this.props.parent !== undefined  && this.props.parent ?
+                <Link to="/ServiceProviderHome"><img src={logo} width="300px" height="120px" className="d-inline-block align-top" alt=""/>
+                </Link> 
+                : 
+                <Link to="/PatientHome"><img src={logo} width="300px" height="120px" className="d-inline-block align-top" alt=""/>
                 </Link>
+                }
                 {typeof this.props.account !== undefined ?
                 <div className="btn-group">
                     <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

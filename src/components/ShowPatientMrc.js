@@ -10,78 +10,82 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import './ShowPatientMrc.css'
-import Web3 from 'web3'
-import Permissions from '../abis/Permissions.json'
 import Encription from '../Encription'
-
+import {loadState, saveToLocalStorage} from '../storage'
+import {loadWeb3, loadBlockchainData} from '../loadBlockchain'
 
 
 class ShowPatientMrc extends Component {
 
-    async componentDidMount(){
-        this.setState({account:localStorage.getItem('account'),
-        patientAccount:localStorage.getItem('patientAccount') })
-        await this.loadWeb3()
-        await this.loadBlockchainData()      
+  async componentDidMount() {
+    // loading blockchain 
+    await loadWeb3()
+    const blockchain = await loadBlockchainData()
+    if(blockchain !== undefined ||blockchain !== null){
+      this.permissions = blockchain.permissions // save smart contruct
     }
-    async loadWeb3() {
-        if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum)
-          await window.ethereum.enable()
-        }
-    
-        else if (window.web3) {
-          window.web3 = new Web3(window.web3.currentProvider)
-        }
-        else {
-          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-        }
-      }
-    
-      async loadBlockchainData() {
-        const web3 = window.web3
-        const networkId = await web3.eth.net.getId()
-        const networkData = Permissions.networks[networkId]
-        if(networkData) {
-          const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
-          this.setState({ permissions })
-          await this.loadingMrC()
-          this.setState({ loading: false }) // show
-        } else {
-          window.alert('MrC contract not deployed to detected network.')
-        }
-      }
-      async loadingMrC(){
-        // get the mrc of this patient
-        const mrc = await this.state.permissions.methods.getMrc(this.state.patientAccount)
-        .call({from:this.state.account})
-        this.setState({mrc})
-    }
+    const oldState = await loadState()
+    this.setState({patientAccount:oldState.patientAccount,account:blockchain.account})
+    await saveToLocalStorage(this.state)
 
+    if(window.performance){
+      if(window.performance.getEntriesByType("navigation")[0].type === 'reload'){
+        
+        //navigate: clicking a link, Entering the URL in the browser's address bar, form submission, Clicking bookmark, initializing through a script operation.
+        //reload: Clicking the Reload button or using Location.reload()
+        //back_forward: Working with browswer history (Bakc and Forward).
+        //prerender: prerendering activity like <link rel="prerender" href="//example.com/next-page.html">
+        
+        // get the mrc of this patient
+        const mrc = await this.permissions.methods.getMrc(this.state.patientAccount)
+        .call({from:this.state.account})
+        const oldState = await loadState()
+        this.setState({mrc})
+        console.log(oldState)
+        this.setState({loading:false,showMrC:true,patientPrivateKey:oldState.patientPrivateKey})
+
+        if(this.state.patientPrivateKey !== '' || this.state.patientPrivateKey !== undefined){
+          this.setState({showAddKey:false})
+          await saveToLocalStorage(this.state)
+        }
+        else{
+          this.setState({showAddKey:true})
+        }
+      }
+      else{
+        this.setState({showAddKey:true})
+      }
+    }
+  }
     constructor(props) {
         super(props)
         this.state = {
-          loading: true,
-            account: '',
-            patientAccount: ''
+          showAddKey: false,
+          loading:true,
+          showMrC:false
         }
+        this.permissions = null
     }
 
     render(){
         return(
             <>
                 <Error>
-                {
-                this.state.loading ? <div>Loading...</div> :
+                {this.state.showAddKey ?<AddPrivateKey  parent ={this} /> : null}
+                {this.state.loading ? <div>Loading...</div> :
                 <>
-                <AddPrivateKey  parent ={this} />
                 <Header account={this.state.account} />
                 <div style={{padding:'40px'}}>
                 <div><b id="mrcOf" style={{fontSize:"20px", paddingLeft:"20px" }}>MrC of {this.state.patientAccount}</b></div>
                 <br/>
                 <UploadEmr parent={this}/>
                 </div>
-              <Mrc  accountShow={this.patientAccount}   mrc= {this.state.mrc} accountKey={this.state.patientPrivateKey}/>
+                {
+                  this.state.showMrC ? 
+                  <Mrc  accountShow={this.state.patientAccount}  
+                   mrc= {this.state.mrc} accountKey={this.state.patientPrivateKey}/> : null
+                }
+                
             <br></br>
             <Foother/>
             </>
@@ -93,15 +97,22 @@ class ShowPatientMrc extends Component {
 }
 
 function AddPrivateKey(props) {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(props.parent.state.showAddKey)
   const [privateKey, setPrivateKey] = useState("")
   
   const handleChange = (event) =>{
     setPrivateKey(event.target.value)
   }
-  const handleSubmit = (event)=>{
+  const handleSubmit = async (event)=>{
     event.preventDefault()
-    props.parent.setState({patientPrivateKey:privateKey})
+    props.parent.setState({patientPrivateKey:privateKey, showAddKey:false})
+    await saveToLocalStorage(props.parent.state) // save to the storage
+    // get the mrc of this patient
+    props.parent.setState({loading:true})
+    const mrc = await props.parent.permissions.methods.getMrc(props.parent.state.patientAccount)
+    .call({from:props.parent.state.account})
+    props.parent.setState({mrc})
+    props.parent.setState({loading:false,showMrC:true})
     setShow(false)
   }
   return (
@@ -112,8 +123,8 @@ function AddPrivateKey(props) {
           <Modal.Title>Add private key</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form.Control value={privateKey} onChange={handleChange} type="text" 
-             placeholder="Enter private key of this patient" required pattern="[a-fA-F0-9]{64}$"
+            <Form.Control value={privateKey} onChange={handleChange} type="password" 
+             placeholder="Enter private key of this patient" required 
              onInvalid={(event) =>  event.target.setCustomValidity("Private key is incorrect!")}/>
         </Modal.Body>
         <Modal.Footer>
@@ -183,7 +194,7 @@ function UploadEmr(props) {
       }
       // save in blockaing!!
       props.parent.setState({ loading: true })
-      await props.parent.state.permissions.methods.addEmr(details.owner,
+      await props.parent.permissions.methods.addEmr(details.owner,
             details.typeEmr,details.statuseEmr,details.time,
             details.data)
             .send({from: details.writer})

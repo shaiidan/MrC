@@ -1,81 +1,64 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import './ServiceProviderHome.css'
 import { Redirect} from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer'
 import Error from './Error'
-import Web3 from 'web3'
-import Permissions from '../abis/Permissions.json'
 import Modal from 'react-bootstrap/Modal'
+import {saveToLocalStorage} from '../storage'
+import {loadWeb3, loadBlockchainData} from '../loadBlockchain'
 
 class ServiceProviderHome extends Component{
-    
+  
+  async componentDidUpdate(){
+    window.onpopstate  = (e) => { 
+      this.props.history.push('/')
+    }      
+}
   async componentDidMount() {
-    await this.loadWeb3()
-    await this.loadBlockchainData()
-  }
-
-  async loadWeb3() {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
-    }
-
-    else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider)
-    }
-    else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+       // loading blockchain
+       await loadWeb3()
+       const blockchain = await loadBlockchainData()
+       if(blockchain !== undefined ||blockchain !== null){
+         this.permissions = blockchain.permissions // save smart contruct
+         this.setState({loading:false,account:blockchain.account,patientAccount:''})
+         await saveToLocalStorage(this.state)
     }
   }
-
-  async loadBlockchainData() {
-    const web3 = window.web3
-    const networkId = await web3.eth.net.getId()
-    const networkData = Permissions.networks[networkId]
-    if(networkData) {
-      const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
-      this.setState({ permissions })
-      this.setState({ loading: false })
-    } else {
-      window.alert('MrC contract not deployed to detected network.')
-    }
-  }
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            account: localStorage.getItem('account'),
-            loading:true,
-            hasPermission:false,
-            patientAccount: '',
-            loadingPatient: false,
-            hasError: false
-        }
-        this.searchPatient = this.searchPatient.bind(this)
-        this.checkPermission = this.checkPermission.bind(this)
+  constructor(props) {
+      super(props)
+      this.state = {
+        loading:true,
+        hasPermission:false,
+        loadingPatient: false,
+        hasError: false
       }
-    
-    async checkPermission(account){
-      if(account !== "" && account !== undefined){       
-        this.setState({ loading: true }) 
-        const check  = await this.state.permissions.methods.havePermission(account).call({from:this.state.account})
-        this.setState({loadingPatient:false})
-        if(check){
-          this.setState({hasPermission:true})
-          localStorage.setItem('patientAccount',account)
-          this.setState({patientAccount:localStorage.getItem('patientAccount')})
-        }
-        else{
-          window.alert("Sorry! you don't have permission!!")
-          this.setState({patientAccount:''})
-        }
+     
+      this.permissions = null
+      this.searchPatient = this.searchPatient.bind(this)
+      this.checkPermission = this.checkPermission.bind(this)
+  }
+  async checkPermission(account){
+    if(account !== "" && account !== undefined){       
+      this.setState({ loading: true }) 
+      const check  = await this.permissions.methods.havePermission(account)
+      .call({from:this.state.account})
+      if(check){
+        this.setState({patientAccount:account,loadingPatient:false,hasPermission:true})
+        await saveToLocalStorage(this.state)
       }
       else{
-        window.alert("Sorry! something wrong happened")
+        window.alert("Sorry! you don't have permission!!")
+        this.setState({patientAccount:''})
+        await saveToLocalStorage(this.state)  
       }
-      this.setState({ loading: false }) // loading finish
     }
+    else{
+      window.alert("Sorry! something wrong happened")
+    }
+    this.setState({ loading: false }) // loading finish
+    //await saveToLocalStorage(this.state)  // save state to storage
+}
       
     async searchPatient(){
       const search = document.getElementById('searchInput')
@@ -86,6 +69,7 @@ class ServiceProviderHome extends Component{
       }
       else{
         this.setState({ permission: false })
+        //await saveToLocalStorage(this.state)  // save state to storage
         window.alert("Sorry! you entered incorrect account")
       }
         search.value = ''
@@ -97,7 +81,7 @@ class ServiceProviderHome extends Component{
                 <Error>
                 {this.state.loading ? <div>Loading.....</div> :
                 <>
-                <Header account={this.state.account}/>
+                <Header parent={true} account={this.state.account}/>
                 <br/><br/><br/>
                 <h4 style={{paddingLeft:"40px",color:"#ff9900"}}>Hello {this.state.account}</h4>
                 <br/><br/>
