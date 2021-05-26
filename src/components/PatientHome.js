@@ -15,16 +15,16 @@ class PatientHome extends Component{
   
   async componentDidMount() {
     // loading blockchain 
-    this.setState({loading:true})
-    await loadWeb3()
+    this.setState({loading:true});
+    await loadWeb3();
     const blockchain = await loadBlockchainData();
     if(blockchain !== undefined ||blockchain !== null){
       this.permissions = blockchain.permissions; // save smart contruct
-      let state = await loadState()
-      const newState = $.extend(this.state,state)
+      let state = await loadState();
+      const newState = $.extend(this.state,state);
       this.setState(newState)
       await this.loadingMrC();
-      this.setState({loading:false})
+      this.setState({loading:false});
     }
     else{
       this.props.history.push('/');
@@ -89,7 +89,7 @@ class PatientHome extends Component{
                 <h4 style={{paddingLeft:"40px",color:"#ff9900"}}>Hello {this.state.account}</h4>
                 <br/>
                 <Mrc accountShow={this.state.account} mrc= {this.state.mrc} accountKey= {this.state.privateKey}/>
-                <br/><br/>
+                
                 <div style={{paddingLeft:"40px"}}>
                     <h4>Access to service providers</h4>
                     <AccessToServiceProvider parent={this} />

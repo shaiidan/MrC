@@ -65,15 +65,14 @@ class Mrc extends Component {
     <div className="col-9">
         <div className="tab-content" id="v-pills-tabContent">
           <div  style={{width: "70%" ,paddingLeft: "40px"}} className="tab-pane fade show active" id="v-pills-laboratory-test-results" role="tabpanel" aria-labelledby="v-pills-v-pills-laboratory-test-results-tab">
-        <table 
+          <table 
           id="table"
           className="table"
-          data-toggle="table"
-          data-flat="true"
-          data-search="true">
-            <thead>
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
               <tr>
-                <th data-field="date"  data-sortable="true" >Time</th>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -91,11 +90,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-references" role="tabpanel" aria-labelledby="v-pills-references-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -113,13 +113,14 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-medications-and-prescriptions" role="tabpanel" aria-labelledby="v-pills-medications-and-prescriptions-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
-                <th data-field="status">Status</th>
+                <th data-field="status" data-sortable="true" >Status</th>
               </tr>
             </thead>
             <tbody>
@@ -136,11 +137,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-imaging-test-results" role="tabpanel" aria-labelledby="v-pills-imaging-test-results-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -158,11 +160,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-your-diagnoses" role="tabpanel" aria-labelledby="v-pills-your-diagnoses-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -180,11 +183,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-your-sensitivity" role="tabpanel" aria-labelledby="v-pills-your-sensitivity-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -203,11 +207,12 @@ class Mrc extends Component {
 
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+                <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -225,11 +230,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-medical-recommendations" role="tabpanel" aria-labelledby="v-pills-medical-recommendations-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+                <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -247,11 +253,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-certificates-of-illness" role="tabpanel" aria-labelledby="v-pills-certificates-of-illness-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>
@@ -270,11 +277,12 @@ class Mrc extends Component {
           <div style={{width: "70%" ,paddingLeft: "40px"}}  className="tab-pane fade" id="v-pills-medical-information-summary" role="tabpanel" aria-labelledby="v-pills-medical-information-summary-tab">
           <table 
           id="table"
-          data-toggle="table"
-          data-toolbar=".toolbar">
-            <thead>
-              <tr>
-                <th data-field="date"  data-sortable="true" >Date</th>
+          className="table"
+          data-sortable="true"
+          data-toggle="table">
+           <thead className="thead-light" >
+               <tr>
+                <th data-field="time"  data-sortable="true" >Time</th>
                 <th data-field="file" >File</th>
               </tr>
             </thead>

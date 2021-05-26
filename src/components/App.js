@@ -1,14 +1,14 @@
-import React, { Component, useState } from 'react'
-import './App.css'
+import React, { Component, useState } from 'react';
+import './App.css';
 import {Redirect} from "react-router-dom";
-import Error from './Error'
-import {loadState, saveToLocalStorage} from '../storage'
-import {loadWeb3, loadBlockchainData,checkPrivateKeySuitableToAccount} from '../loadBlockchain'
-import Form from 'react-bootstrap/Form'
+import Error from './Error';
+import {loadState, saveToLocalStorage} from '../storage';
+import {loadWeb3, loadBlockchainData,checkPrivateKeySuitableToAccount} from '../loadBlockchain';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup'
-import Header from './Header'
-import Footer from './Footer'
+import InputGroup from 'react-bootstrap/InputGroup';
+import Header from './Header';
+import Footer from './Footer';
 
 class App extends Component {
  
@@ -141,4 +141,4 @@ function Login(props){
     </div>
   );
 }
-export default
+export default App;
