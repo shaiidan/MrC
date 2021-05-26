@@ -1,5 +1,5 @@
 // load state from localStorage
-export const loadState = async () => {
+export const loadState = async  () => {
     try {
       const serializedState = localStorage.getItem('state');
        if (serializedState === null) {

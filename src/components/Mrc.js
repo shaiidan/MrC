@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Error from './Error'
 import Encription from '../Encription'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 
 class Mrc extends Component {
 

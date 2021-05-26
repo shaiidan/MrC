@@ -4,31 +4,47 @@ import { Redirect} from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer'
 import Error from './Error'
-import Modal from 'react-bootstrap/Modal'
-import {saveToLocalStorage} from '../storage'
+import {loadState, saveToLocalStorage} from '../storage'
 import {loadWeb3, loadBlockchainData} from '../loadBlockchain'
+import $ from 'jquery'
+
 
 class ServiceProviderHome extends Component{
   
-  async componentDidUpdate(){
+  componentDidUpdate(){
+    // user click back on browser from showPatient home, 
+    // so he move to serviveProviderHome and can't comeback to showPatient page 
     window.onpopstate  = (e) => { 
-      this.props.history.push('/')
+      this.props.history.push('/ServiceProviderHome')
     }      
-}
+  }
   async componentDidMount() {
-       // loading blockchain
-       await loadWeb3()
-       const blockchain = await loadBlockchainData()
-       if(blockchain !== undefined ||blockchain !== null){
-         this.permissions = blockchain.permissions // save smart contruct
-         this.setState({loading:false,account:blockchain.account,patientAccount:''})
-         await saveToLocalStorage(this.state)
+    // loading blockchain
+    await loadWeb3();
+    const blockchain = await loadBlockchainData();
+    if(blockchain !== undefined ||blockchain !== null){
+      this.permissions = blockchain.permissions; // save smart contruct
+      let state = await loadState();
+      const newState = $.extend(this.state,state);
+      this.setState(newState);
+      state = $.extend(state, { patientAccount:''});
+      await saveToLocalStorage(state);
+      this.setState({loading:false});
+      // Authentication 
+      if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
+        this.props.history.push('/');
+      }
+    }
+    else{
+      this.props.history.push('/');
     }
   }
   constructor(props) {
       super(props)
       this.state = {
+        patientAccount:'',
         loading:true,
+        searchValue:'0x',
         hasPermission:false,
         loadingPatient: false,
         hasError: false
@@ -37,43 +53,48 @@ class ServiceProviderHome extends Component{
       this.permissions = null
       this.searchPatient = this.searchPatient.bind(this)
       this.checkPermission = this.checkPermission.bind(this)
+      this.changeSearchHandle = this.changeSearchHandle.bind(this)
   }
+  // check permission on blockchain
   async checkPermission(account){
     if(account !== "" && account !== undefined){       
-      this.setState({ loading: true }) 
       const check  = await this.permissions.methods.havePermission(account)
       .call({from:this.state.account})
+      return check 
+    }
+    return false;
+  }
+  // on click search
+  async searchPatient(){
+    const search = this.state.searchValue
+    // check if have permission
+    if(search !== undefined && search !== '' 
+    && search.length === 42 && search.match('0x[a-fA-F0-9]{40}$')){
+      this.setState({ loading: true }) 
+      const check = await this.checkPermission(search)
+      this.setState({ loading: false })  
       if(check){
-        this.setState({patientAccount:account,loadingPatient:false,hasPermission:true})
-        await saveToLocalStorage(this.state)
+        let state = await loadState() // get the old state
+        state = $.extend(state,{patientAccount:search}) // add patientAccount to the state
+        await saveToLocalStorage(state)
+        this.setState({patientAccount:search,hasPermission:true})
       }
       else{
         window.alert("Sorry! you don't have permission!!")
-        this.setState({patientAccount:''})
-        await saveToLocalStorage(this.state)  
+        this.setState({patientAccount:'',hasPermission:false})
       }
     }
     else{
-      window.alert("Sorry! something wrong happened")
+      this.setState({hasPermission: false })
+      window.alert("Sorry! you entered incorrect account")
     }
-    this.setState({ loading: false }) // loading finish
-    //await saveToLocalStorage(this.state)  // save state to storage
-}
-      
-    async searchPatient(){
-      const search = document.getElementById('searchInput')
-      // check if have permission
-      if(search !== undefined && search.value !== '' ){
-        this.setState({loadingPatient:true})  // show loading 
-        await this.checkPermission(search.value)
-      }
-      else{
-        this.setState({ permission: false })
-        //await saveToLocalStorage(this.state)  // save state to storage
-        window.alert("Sorry! you entered incorrect account")
-      }
-        search.value = ''
-    }
+    this.setState({searchValue:'0x'}) 
+  }
+
+  // value search change
+  changeSearchHandle(event){
+    this.setState({searchValue:event.target.value})
+  }
 
     render() {
         return(
@@ -89,17 +110,14 @@ class ServiceProviderHome extends Component{
                   <h5 style={{textAlign: "center"}}>Searching patient by address</h5>
                   <div className="cover">
                       <div className="divFrom" >     
-                          <input type="search" id="searchInput" />
+                          <input type="search" id="searchInput" value={this.state.searchValue} 
+                          onChange={this.changeSearchHandle} minLength="42" maxLength="42" 
+                          />
                               <i className="fa fa-search"  
-                              onClick={async () => {await this.searchPatient()}} onTouchEnd={async () => {await this.searchPatient()}} ></i>
+                              onClick={this.searchPatient}
+                              onTouchEnd={this.searchPatient} ></i>
                       </div>
                   </div>
-                  <Modal show={this.state.loadingPatient}  onHide={() => null}>
-                    <Modal.Header >
-                      <Modal.Title>Loading..</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body><span>Please wait...</span></Modal.Body>
-                  </Modal>
                   {this.state.hasPermission 
                   ?  
                   <Redirect push to={{

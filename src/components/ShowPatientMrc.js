@@ -3,6 +3,7 @@ import Foother from './Footer'
 import Header from './Header'
 import Mrc from './Mrc'
 import IconUpload from '../images/icon_upload.png'
+import IconExit from '../images/exit_icon.jpg'
 import Error from './Error'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
@@ -12,8 +13,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import './ShowPatientMrc.css'
 import Encription from '../Encription'
 import {loadState, saveToLocalStorage} from '../storage'
-import {loadWeb3, loadBlockchainData} from '../loadBlockchain'
-
+import {loadWeb3, loadBlockchainData,checkPrivateKeySuitableToAccount} from '../loadBlockchain'
+import { Link} from "react-router-dom";
+import $ from 'jquery'
 
 class ShowPatientMrc extends Component {
 
@@ -24,47 +26,53 @@ class ShowPatientMrc extends Component {
     if(blockchain !== undefined ||blockchain !== null){
       this.permissions = blockchain.permissions // save smart contruct
     }
-    const oldState = await loadState()
-    this.setState({patientAccount:oldState.patientAccount,account:blockchain.account})
-    await saveToLocalStorage(this.state)
+    const state = await loadState()
+    this.setState(state)
 
-    if(window.performance){
-      if(window.performance.getEntriesByType("navigation")[0].type === 'reload'){
-        
-        //navigate: clicking a link, Entering the URL in the browser's address bar, form submission, Clicking bookmark, initializing through a script operation.
-        //reload: Clicking the Reload button or using Location.reload()
-        //back_forward: Working with browswer history (Bakc and Forward).
-        //prerender: prerendering activity like <link rel="prerender" href="//example.com/next-page.html">
-        
-        // get the mrc of this patient
-        const mrc = await this.permissions.methods.getMrc(this.state.patientAccount)
-        .call({from:this.state.account})
-        const oldState = await loadState()
-        this.setState({mrc})
-        console.log(oldState)
-        this.setState({loading:false,showMrC:true,patientPrivateKey:oldState.patientPrivateKey})
-
-        if(this.state.patientPrivateKey !== '' || this.state.patientPrivateKey !== undefined){
-          this.setState({showAddKey:false})
-          await saveToLocalStorage(this.state)
-        }
-        else{
-          this.setState({showAddKey:true})
-        }
-      }
-      else{
-        this.setState({showAddKey:true})
-      }
+    // Authentication 
+    if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
+      this.props.history.push('/')
+    }
+    else{
+      this.props.history.push('/');
     }
   }
     constructor(props) {
         super(props)
         this.state = {
-          showAddKey: false,
+          showAddKey: true,
           loading:true,
           showMrC:false
         }
         this.permissions = null
+    }
+
+    async addPrivateKeyAndLoadingMrc(privateKey){
+      this.setState({patientPrivateKey:privateKey, showAddKey:false})
+      let state = await loadState()
+      state = $.extend(state, {patientPrivateKey:privateKey})
+      await saveToLocalStorage(state) // save to the storage
+      // get the mrc of this patient
+      this.setState({loading:true})
+      const mrc = await this.permissions.methods.getMrc(this.state.patientAccount)
+      .call({from:this.state.account})
+      this.setState({mrc})
+      this.setState({loading:false,showMrC:true})
+    }
+
+    async addEmr(details){
+       // save in blockaing!!
+       this.setState({ loading: true })
+       await this.permissions.methods.addEmr(details.owner,
+             details.typeEmr,details.statuseEmr,details.time,details.data)
+             .send({from: details.writer})
+             .once('error', (error) => {
+               this.setState({ hasError: true })
+               console.log(error)
+             })
+             .once('confirmation', (confirmation) => {
+               this.setState({ loading: false })
+             })
     }
 
     render(){
@@ -74,7 +82,12 @@ class ShowPatientMrc extends Component {
                 {this.state.showAddKey ?<AddPrivateKey  parent ={this} /> : null}
                 {this.state.loading ? <div>Loading...</div> :
                 <>
-                <Header account={this.state.account} />
+                <Header parent={true} account={this.state.account} />
+                <br/>
+                <Link  to="/ServiceProviderHome">
+                  <img src={IconExit} width="100px" height="60px" 
+                  style={{paddingLeft:"40px", float:'right'}} alt=""/>
+                </Link> 
                 <div style={{padding:'40px'}}>
                 <div><b id="mrcOf" style={{fontSize:"20px", paddingLeft:"20px" }}>MrC of {this.state.patientAccount}</b></div>
                 <br/>
@@ -97,35 +110,41 @@ class ShowPatientMrc extends Component {
 }
 
 function AddPrivateKey(props) {
-  const [show, setShow] = useState(props.parent.state.showAddKey)
-  const [privateKey, setPrivateKey] = useState("")
+  const [show, setShow] = useState(props.parent.state.showAddKey);
+  const [privateKey, setPrivateKey] = useState("");
+  const [msgError, setMsgError] = useState('');
   
   const handleChange = (event) =>{
-    setPrivateKey(event.target.value)
+    setPrivateKey(event.target.value);
   }
+
   const handleSubmit = async (event)=>{
     event.preventDefault()
-    props.parent.setState({patientPrivateKey:privateKey, showAddKey:false})
-    await saveToLocalStorage(props.parent.state) // save to the storage
-    // get the mrc of this patient
-    props.parent.setState({loading:true})
-    const mrc = await props.parent.permissions.methods.getMrc(props.parent.state.patientAccount)
-    .call({from:props.parent.state.account})
-    props.parent.setState({mrc})
-    props.parent.setState({loading:false,showMrC:true})
-    setShow(false)
+
+    if(privateKey !== undefined && privateKey !== '' && privateKey.length === 64
+    && privateKey.match('^[A-Fa-f0-9]{64}$') && 
+    checkPrivateKeySuitableToAccount(props.parent.state.patientAccount,privateKey)){
+        setMsgError('')
+        props.parent.addPrivateKeyAndLoadingMrc(privateKey)
+        setShow(false)
+    }
+    else{
+      setMsgError('Private key is incorrect')
+    }
   }
+
   return (
     <>
     <Modal show={show} onHide={() => null} >
-        <Form onSubmit={handleSubmit}>
+        <Form  method='GET' onSubmit={handleSubmit} id='formPrivateKey'>
         <Modal.Header>
           <Modal.Title>Add private key</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form.Control value={privateKey} onChange={handleChange} type="password" 
-             placeholder="Enter private key of this patient" required 
-             onInvalid={(event) =>  event.target.setCustomValidity("Private key is incorrect!")}/>
+          <Form.Label style={{fontSize:'15px', color:'red'}}>{msgError}</Form.Label>
+            <Form.Control id='inputPrivateKey' value={privateKey} onChange={handleChange} type="password" 
+             placeholder="Enter private key of this patient" required
+             onInvalid={(event) =>  event.target.setCustomValidity("Private key is required")}/>
         </Modal.Body>
         <Modal.Footer>
           <Button type="submit"  variant="primary">
@@ -192,19 +211,8 @@ function UploadEmr(props) {
           writer: props.parent.state.account,
           data: Encription.encrypt(base64Data,props.parent.state.patientPrivateKey) 
       }
-      // save in blockaing!!
-      props.parent.setState({ loading: true })
-      await props.parent.permissions.methods.addEmr(details.owner,
-            details.typeEmr,details.statuseEmr,details.time,
-            details.data)
-            .send({from: details.writer})
-            .once('error', (error) => {
-              props.parent.setState({ hasError: true })
-              console.log(error)
-            })
-            .once('confirmation', (confirmation) => {
-              props.parent.setState({ loading: false })
-            })
+      props.parent.addEmr(details)
+     
     }
     return (
         <>
