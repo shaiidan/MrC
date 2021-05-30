@@ -27,9 +27,10 @@ class ServiceProviderHome extends Component{
       let state = await loadState();
       const newState = $.extend(this.state,state);
       this.setState(newState);
-      state = $.extend(state, { patientAccount:''});
+      state = $.extend(state, { patientAccount:'',patientPrivateKey:''});
       await saveToLocalStorage(state);
       this.setState({loading:false});
+
       // Authentication 
       if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
         this.props.history.push('/');
@@ -39,6 +40,7 @@ class ServiceProviderHome extends Component{
       this.props.history.push('/');
     }
   }
+
   constructor(props) {
       super(props)
       this.state = {
@@ -46,7 +48,6 @@ class ServiceProviderHome extends Component{
         loading:true,
         searchValue:'0x',
         hasPermission:false,
-        loadingPatient: false,
         hasError: false
       }
      
@@ -70,25 +71,27 @@ class ServiceProviderHome extends Component{
     // check if have permission
     if(search !== undefined && search !== '' 
     && search.length === 42 && search.match('0x[a-fA-F0-9]{40}$')){
+      
       this.setState({ loading: true }) 
       const check = await this.checkPermission(search)
-      this.setState({ loading: false })  
       if(check){
         let state = await loadState() // get the old state
         state = $.extend(state,{patientAccount:search}) // add patientAccount to the state
         await saveToLocalStorage(state)
-        this.setState({patientAccount:search,hasPermission:true})
+        this.setState({ loading: false })  
+        this.setState({patientAccount:search,hasPermission:true}) // move to show pateint mrc
       }
       else{
         window.alert("Sorry! you don't have permission!!")
-        this.setState({patientAccount:'',hasPermission:false})
+        this.setState({loading: false,patientAccount:'',hasPermission:false})
+        this.setState({searchValue:'0x'}) 
       }
     }
     else{
-      this.setState({hasPermission: false })
+      this.setState({loading: false,hasPermission: false })
       window.alert("Sorry! you entered incorrect account")
+      this.setState({searchValue:'0x'}) 
     }
-    this.setState({searchValue:'0x'}) 
   }
 
   // value search change
@@ -118,13 +121,13 @@ class ServiceProviderHome extends Component{
                               onTouchEnd={this.searchPatient} ></i>
                       </div>
                   </div>
+                </div>
                   {this.state.hasPermission 
                   ?  
                   <Redirect push to={{
                     pathname: "/ShowPatientMrc"
                   }} />          
                   : null}
-              </div>
               <Footer/>
               </>
               }

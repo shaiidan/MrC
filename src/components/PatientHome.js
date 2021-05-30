@@ -90,8 +90,9 @@ class PatientHome extends Component{
                 <br/>
                 <Mrc accountShow={this.state.account} mrc= {this.state.mrc} accountKey= {this.state.privateKey}/>
                 
-                <div style={{paddingLeft:"40px"}}>
-                    <h4>Access to service providers</h4>
+                <div style={{padding:"40px"}}>
+                    <h4 style={{borderBottom: '5px solid', borderBottomColor:'#ff9900'}}>
+                      Access to service providers</h4>
                     <AccessToServiceProvider parent={this} />
                     <br/>
                 { this.state.accessList !== undefined ?

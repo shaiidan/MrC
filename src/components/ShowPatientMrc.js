@@ -24,31 +24,35 @@ class ShowPatientMrc extends Component {
     await loadWeb3()
     const blockchain = await loadBlockchainData()
     if(blockchain !== undefined ||blockchain !== null){
-      this.permissions = blockchain.permissions // save smart contruct
-    }
-    const state = await loadState()
-    this.setState(state)
-
-    // Authentication 
-    if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
-      this.props.history.push('/')
+      this.permissions = blockchain.permissions; // save smart contruct
     }
     else{
       this.props.history.push('/');
     }
-  }
-    constructor(props) {
-        super(props)
-        this.state = {
-          showAddKey: true,
-          loading:true,
-          showMrC:false
-        }
-        this.permissions = null
+
+    const state = await loadState()
+    this.setState(state);
+    this.setState({showAddKey:true,loading:false});
+
+    // Authentication 
+    if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
+      this.props.history.push('/');
     }
+  }
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      showAddKey: false,
+      loading:true,
+      showMrC:false,
+      patientPrivateKey:''
+    }
+    this.permissions = null
+  }
 
     async addPrivateKeyAndLoadingMrc(privateKey){
-      this.setState({patientPrivateKey:privateKey, showAddKey:false})
+      this.setState({patientPrivateKey:privateKey})
       let state = await loadState()
       state = $.extend(state, {patientPrivateKey:privateKey})
       await saveToLocalStorage(state) // save to the storage
@@ -57,7 +61,7 @@ class ShowPatientMrc extends Component {
       const mrc = await this.permissions.methods.getMrc(this.state.patientAccount)
       .call({from:this.state.account})
       this.setState({mrc})
-      this.setState({loading:false,showMrC:true})
+      this.setState({loading:false, showAddKey:false, showMrC:true})
     }
 
     async addEmr(details){
@@ -79,8 +83,8 @@ class ShowPatientMrc extends Component {
         return(
             <>
                 <Error>
-                {this.state.showAddKey ?<AddPrivateKey  parent ={this} /> : null}
                 {this.state.loading ? <div>Loading...</div> :
+                this.state.showAddKey ?<AddPrivateKey patientAccount={this.state.patientAccount} parent ={this} /> : 
                 <>
                 <Header parent={true} account={this.state.account} />
                 <br/>
@@ -125,8 +129,8 @@ function AddPrivateKey(props) {
     && privateKey.match('^[A-Fa-f0-9]{64}$') && 
     checkPrivateKeySuitableToAccount(props.parent.state.patientAccount,privateKey)){
         setMsgError('')
-        props.parent.addPrivateKeyAndLoadingMrc(privateKey)
         setShow(false)
+        props.parent.addPrivateKeyAndLoadingMrc(privateKey)
     }
     else{
       setMsgError('Private key is incorrect')
@@ -138,7 +142,7 @@ function AddPrivateKey(props) {
     <Modal show={show} onHide={() => null} >
         <Form  method='GET' onSubmit={handleSubmit} id='formPrivateKey'>
         <Modal.Header>
-          <Modal.Title>Add private key</Modal.Title>
+          <Modal.Title style={{fontSize:'20px'}}>Add private key for<br/> {props.patientAccount}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Label style={{fontSize:'15px', color:'red'}}>{msgError}</Form.Label>
