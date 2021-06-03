@@ -57,6 +57,10 @@ class ShowPatientMrc extends Component {
       state = $.extend(state, {patientPrivateKey:privateKey})
       await saveToLocalStorage(state) // save to the storage
       // get the mrc of this patient
+      await this.loadingMrc()
+    }
+
+    async loadingMrc(){
       this.setState({loading:true})
       const mrc = await this.permissions.methods.getMrc(this.state.patientAccount)
       .call({from:this.state.account})
@@ -76,7 +80,8 @@ class ShowPatientMrc extends Component {
              })
              .once('confirmation', (confirmation) => {
                this.setState({ loading: false })
-             })
+               this.loadingMrc();
+              })
     }
 
     render(){

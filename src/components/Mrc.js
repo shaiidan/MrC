@@ -50,6 +50,19 @@ class Mrc extends Component {
     return columns;
   }
 
+  //conver status number to status string
+  statusToString(status){
+    if(status === 0){
+      return 'VALID';
+    }
+    else if(status === 1){
+      return 'EXPIRED';
+    }
+    else if(status === 2){
+      return 'BOUGHT'
+    }
+  }
+
   // get emrs by type
   getEmrs(type){
     let emrs =[];
@@ -70,7 +83,7 @@ class Mrc extends Component {
             {
               time: emr.time,
               file: <a href={h} download={fileName}>Download</a>,
-              status:emr.statusEmr
+              status: this.statusToString(emr.statusEmr)
             });
         }
       } 
