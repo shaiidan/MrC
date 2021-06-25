@@ -15,7 +15,6 @@ class PatientHome extends Component{
   
   async componentDidMount() {
     // loading blockchain 
-    this.setState({loading:true});
     await loadWeb3();
     const blockchain = await loadBlockchainData();
     if(blockchain !== undefined ||blockchain !== null){
@@ -94,8 +93,8 @@ class PatientHome extends Component{
                     <h4 style={{borderBottom: '5px solid', borderBottomColor:'#ff9900'}}>
                       Access to service providers</h4>
                     <AccessToServiceProvider parent={this} />
-                    <br/>
-                { this.state.accessList !== undefined ?
+                <br/>
+                { this.state.accessList !== undefined && this.state.accessList !== null ?
                     this.state.accessList.map(access =>{
                         return (<b key={access}>{access.toString()}<span>    </span> 
                               <img src={deleteIcon} width="20px" height="20px"  onClick={() => this.removeAccess(access)} alt=""/></b>) 

@@ -97,7 +97,7 @@ class Mrc extends Component {
         <>
         <Error>
           {this.state.hasError ? <Redirect to="/Error" /> :
-          this.state.mrc.length === 0 
+          this.state.mrc === null || this.state.mrc.length === 0 
           ? <div className="text-center" style={{color:"orange", fontSize: "30px"}} ><b>MrC is empty!</b></div>
           :
             <div className="row" style={{padding: "40px", paddingRight: "100px"}}>  
