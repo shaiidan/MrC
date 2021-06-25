@@ -1,0 +1,31 @@
+node1 - 
+0xe6d79dEf17076BAB9aF6075C08E85d32C04FA054
+pass- 121212
+port attach - 8545
+
+geth --networkid 211405 --datadir "./data"  --port 30303 --ipcdisable --syncmode full --http --allow-insecure-unlock --http.corsdomain "*" --http.port 8545 --unlock 0xe6d79dEf17076BAB9aF6075C08E85d32C04FA054 --password password.txt  --http.addr 'localhost' --http.api personal,admin,db,eth,net,web3,miner,shh,txpool,debug,clique console
+
+node2 -
+0xfFF48666FBbe9A33d22e50a1E45f5F3702b14671
+pass - 121212
+port attach - 8546
+
+geth --networkid 211405 --datadir "./data"  --port 30304 --ipcdisable --syncmode full --http --allow-insecure-unlock --http.corsdomain "*" --http.port 8546 --unlock 0xfFF48666FBbe9A33d22e50a1E45f5F3702b14671 --password password.txt --http.addr 'localhost' --http.api personal,admin,db,eth,net,web3,miner,shh,txpool,debug,clique console
+
+
+miner1 -
+0x5e287bebb6d4892f46a711CFf32Ee81061b4a28c
+pass - 121212
+port attach - 8547
+
+geth --networkid 211405 --datadir "./data"  --port 30305 --ipcdisable --syncmode full --http --allow-insecure-unlock --http.corsdomain "*" --http.port 8547 --unlock 0x5e287bebb6d4892f46a711CFf32Ee81061b4a28c --password password.txt --http.addr 'localhost' --http.api db,eth,net,web3,personal,miner,clique  --mine  console
+
+
+
+
+
+[
+"enode://db40336b8929dec36996dac217e0d06e0c4280ae83109c2ef3788b298ff33e51d30017c4270b55ac04370f33ecddf4f75a0155f52a439cd5a40a12ec620a347c@127.0.0.1:3030"
+,"enode://f43c1097d22a3f49a9187d6caa960f335241b548ed3bace364d0b6ee3b762be3136abff5d57a1dfb56a51113f858b0247109ea8023cb7cc1a6fef406f0a11264@127.0.0.1:30304"
+,"enode://9bb1d8a43da5883d4a5536787fc016c9d82cf35d37ec77f44c66ea5de58f5938eea56376774cf048ed330755703f9e0993b903a2612f3a1de42b268342bb378d@127.0.0.1:30305"
+]
