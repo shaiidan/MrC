@@ -7,12 +7,19 @@ type user           index
 service provider      0    :  - family 
 PK = 0xbdAd07B27DA31E92AE1C4AD9353563658ed4BF00
 PV = 62f70cf1dd9896db09996782a98978ce07398eaddd3e6da13dd98fcdc998ac8f
+
 service provider      1    :  - Orthopedist
 Pk = 0x70dd15C82Ec01a955aB2e72e32C1813Ac700Fe22
 PV = 8e6ec6a2a4d0e6de2abe1d61722694d7ccaa7e786cee936341c0063b151b8153
+
 patient               2    :   - Moshe
 PK = 0xf602d1079C272B3818e76099997F4cBbcc174142
 PV = 70dadf395cc6bb9041f98697c8c3a1127294ce05c4223aedbf01dd088742c944
-patient               3    :   - David 
+
+patient               3    :   - David
 PK= 0x2b3f26f35C36b503eA8058A11f3f246Ba4d5Bd74
 PV = 24de503cbfe7f2ea782bd35e6f96e6b3220ed618a4de9b6f4dfb44a30f4ccc9b
+
+patient               4    :   - Yossi
+pk = 0xe17ABC8412f1fF6A25154DC01D2BEBd37D34f18c
+PV = 7c5767ad1d40511c91e592395c4aeb3ecd80ea3cf4a199d096c03c4fef77fbd0
