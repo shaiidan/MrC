@@ -22,6 +22,7 @@ class App extends Component {
       const state = await loadState() 
       this.setState(state)
       this.setState({account:blockchain.account,loading:false})
+
     }
   }
   
@@ -42,8 +43,14 @@ class App extends Component {
       login:true,
       serviceProvider:details.serviceProvider
     }
-    await saveToLocalStorage(state)
-    this.setState({login:true, serviceProvider:details.serviceProvider})
+    await saveToLocalStorage(state);
+    this.setState({login:true, serviceProvider:details.serviceProvider});
+  }
+
+  async checkSerivceProvider(account){
+    const check  = await this.permissions.methods.hisServiceProvider()
+      .call({from:account});
+    return check;
   }
 
   render() {
@@ -87,9 +94,16 @@ function Login(props){
   const handleChangePrivateKey = (event) =>{
     setPrivateKey(event.target.value)
   }
-  const selectTypeToLogin = (event) =>{
+  const selectTypeToLogin = async (event) =>{
     if(event.target.id === 'serviceProviderLogin'){
-      setServiceProvider(true)
+      const check = await props.parent.checkSerivceProvider(account);
+      if(check){
+        setServiceProvider(true);
+      }
+      else{
+        setMsgError("You not a service provider!!");
+        setServiceProvider(false);
+      }
     }
     else {
       setServiceProvider(false)
@@ -129,9 +143,9 @@ function Login(props){
          <Form.Label>Login as:</Form.Label><br/>
           <InputGroup className='mb-3' required style={{paddingLeft:"5%"}}>
            <InputGroup.Prepend>
-             <InputGroup.Radio defaultChecked id="patientLogin" onClick={selectTypeToLogin} name="group1"/>
+             <InputGroup.Radio checked= {!serviceProvider} id="patientLogin" onClick={selectTypeToLogin} name="group1"/>
              <InputGroup.Text >A patient</InputGroup.Text>
-            <InputGroup.Radio id="serviceProviderLogin" onClick={selectTypeToLogin} name="group1"/>
+            <InputGroup.Radio checked={serviceProvider} id="serviceProviderLogin" onClick={selectTypeToLogin} name="group1"/>
             <InputGroup.Text >A service provider</InputGroup.Text>
            </InputGroup.Prepend>
           </InputGroup> 
