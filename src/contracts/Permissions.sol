@@ -154,6 +154,9 @@ contract Permissions {
     return serviceProvidersPermissions[msg.sender];
   }
 
+  /**
+   * Check if serive provider has permission.
+   */
   function havePermission(address patient) public view returns(bool){
     
     bool hasPermission = false;
@@ -165,4 +168,20 @@ contract Permissions {
     
     return hasPermission;
   }
+
+  /**
+   * Returns all the service provider addresses that the patient gave access.
+   */
+   function hisServiceProvider() public view returns(bool){
+
+     address s = msg.sender;
+
+     if(s == 0xbdAd07B27DA31E92AE1C4AD9353563658ed4BF00){
+       return true;
+     }
+     else if(s == 0x70dd15C82Ec01a955aB2e72e32C1813Ac700Fe22){
+       return true;
+     }
+     return false;
+   }
 } // end of contruct 

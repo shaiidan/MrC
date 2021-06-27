@@ -96,8 +96,13 @@ class PatientHome extends Component{
                 <br/>
                 { this.state.accessList !== undefined && this.state.accessList !== null ?
                     this.state.accessList.map(access =>{
-                        return (<b key={access}>{access.toString()}<span>    </span> 
-                              <img src={deleteIcon} width="20px" height="20px"  onClick={() => this.removeAccess(access)} alt=""/></b>) 
+                        return (
+                           <div>
+                              <b key={access}>{access.toString()}<span>    </span> 
+                              <img src={deleteIcon} width="20px" height="20px"  onClick={() => this.removeAccess(access)} alt=""/></b>
+                              <br/>
+                           </div>
+                              ) 
                     })
                     : null
                 }
