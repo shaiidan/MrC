@@ -21,7 +21,7 @@ class ShowPatientMrc extends Component {
 
   async componentDidMount() {
     // loading blockchain 
-    const blockchian = await loadWeb3();
+    const blockchain = await loadWeb3();
     if(blockchain !== null){
       const blockchainData = await loadBlockchainData();
       if(blockchainData !== undefined ||blockchainData !== null){
