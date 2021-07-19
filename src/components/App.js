@@ -15,9 +15,9 @@ class App extends Component {
   async componentDidMount() {
     // loading blockchain 
     localStorage.clear()
-    await loadWeb3()
-    const blockchain = await loadBlockchainData()
-    if(blockchain !== undefined ||blockchain !== null){
+    const blockchian = await loadWeb3()
+    const blockchainData = await loadBlockchainData()
+    if(blockchainData !== undefined ||blockchainData !== null || blockchian !== null){
       this.permissions = blockchain.permissions // save smart contruct
       const state = await loadState() 
       this.setState(state)
