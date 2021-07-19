@@ -21,7 +21,7 @@ class App extends Component {
       this.permissions = blockchainData.permissions; // save smart contruct
       const state = await loadState();
       this.setState(state);
-      this.setState({account:blockchain.account,loading:false});
+      this.setState({account:blockchainData.account,loading:false});
 
     }
   }
