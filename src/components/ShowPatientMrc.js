@@ -22,21 +22,22 @@ class ShowPatientMrc extends Component {
   async componentDidMount() {
     // loading blockchain 
     const blockchian = await loadWeb3();
-    const blockchainData = await loadBlockchainData();
-    if((blockchainData !== undefined ||blockchainData !== null) && blockchian !== null){
-      this.permissions = blockchainData.permissions; // save smart contruct
-    }
-    else{
-      this.props.history.push('/');
-    }
+    if(blockchain !== null){
+      const blockchainData = await loadBlockchainData();
+      if(blockchainData !== undefined ||blockchainData !== null){
+        this.permissions = blockchainData.permissions; // save smart contruct
+      }
+      else{
+        this.props.history.push('/');
+      }
+      const state = await loadState()
+      this.setState(state);
+      this.setState({showAddKey:true,loading:false});
 
-    const state = await loadState()
-    this.setState(state);
-    this.setState({showAddKey:true,loading:false});
-
-    // Authentication 
-    if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
-      this.props.history.push('/');
+      // Authentication 
+      if(this.state.serviceProvider === undefined || !this.state.serviceProvider){
+        this.props.history.push('/');
+      }
     }
   }
   
