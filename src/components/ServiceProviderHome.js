@@ -20,10 +20,10 @@ class ServiceProviderHome extends Component{
   }
   async componentDidMount() {
     // loading blockchain
-    const blockchian = await loadWeb3()
-    const blockchainData = await loadBlockchainData()
-    if(blockchainData !== undefined ||blockchainData !== null || blockchian !== null){
-      this.permissions = blockchain.permissions; // save smart contruct
+    const blockchian = await loadWeb3();
+    const blockchainData = await loadBlockchainData();
+    if((blockchainData !== undefined ||blockchainData !== null) && blockchian !== null){
+      this.permissions = blockchainData.permissions; // save smart contruct
       let state = await loadState();
       const newState = $.extend(this.state,state);
       this.setState(newState);
