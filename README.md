@@ -57,8 +57,7 @@ Test Network - Using Ganache,
 To run the first node we will run the following command -
 
 '''bash
-$ cd network
-$ geth --datadir node1/ --miner.gasprice '0' --mine --unlock '0x26474347e1c57Fcc59F10675E196ba46a101205c' --password node1/password.txt --syncmode 'full' --port 40310 --http --http.port 8501 --http.addr '0.0.0.0' --http.vhosts "*"   --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+$ cd network & geth --datadir node1/ --miner.gasprice '0' --mine --unlock '0x26474347e1c57Fcc59F10675E196ba46a101205c' --password node1/password.txt --syncmode 'full' --port 40310 --http --http.port 8501 --http.addr '0.0.0.0' --http.vhosts "*"   --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
 '''
 To know how to run the rest of the nodes go into the project enter the file:
 
