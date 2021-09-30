@@ -66,7 +66,7 @@ To know how to run the rest of the nodes go into the project enter the file:
 ```bash
 $ cd MrC/network/.configNetwork/run_nodes.txt
 ```
-And each node contains run=(we will copy it to bash)
+* All nodes in the file contains run=(we will copy it to bash)
 
 ## Running MetaMask
 
