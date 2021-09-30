@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router , Route} from 'react-router-dom';
 import App from './components/App';
-import ServiceProviderHome from './components/ServiceProviderHome'
-import ShowPatientMrc from './components/ShowPatientMrc'
-import Error from './components/Error'
-import PatientHome from './components/PatientHome'
+import ServiceProviderHome from './components/ServiceProviderHome';
+import ShowPatientMrc from './components/ShowPatientMrc';
+import Error from './components/Error';
+import PatientHome from './components/PatientHome';
 
 /**
  * All routes go here.

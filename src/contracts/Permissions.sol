@@ -168,10 +168,9 @@ contract Permissions {
     
     return hasPermission;
   }
-
-  /**
-   * Returns all the service provider addresses that the patient gave access.
-   */
+/** 
+   //Returns all the service provider addresses that the patient gave access.
+   
    function hisServiceProvider() public view returns(bool){
 
      address s = msg.sender;
@@ -184,4 +183,6 @@ contract Permissions {
      }
      return false;
    }
+*/
+
 } // end of contruct 

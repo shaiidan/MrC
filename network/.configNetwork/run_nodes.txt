@@ -1,0 +1,599 @@
+
+--- all the miner run with console
+--- light nodes run without console but if we want to run with console add word 'console' to end of the command 
+
+node1 - miner 
+enode = "enode://eac0f84d41f600087c39eee356ba1331f789083d001cc377de13f036fcbe72905fd2864ee72ec2acaf307642b8aa6f328c4e333da5553d02351c6019993d5549@127.0.0.1:40310?discport=0"
+run = 
+geth --datadir node1/ --miner.gasprice '0' --mine --unlock '0x26474347e1c57Fcc59F10675E196ba46a101205c' --password node1/password.txt --syncmode 'full' --port 40310 --http --http.port 8501 --http.addr '0.0.0.0' --http.vhosts "*"   --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+
+node2 - miner 
+enode = "enode://20db8eab2e19147a76b051a387a0c67a83ada42d72bc12e76046d50e9ca58a219a2240fae510f2feeabd0e669b2cdc7aea0936a512446e41cfc847acb0db7a43@127.0.0.1:40311?discport=0"
+run = 
+geth --datadir node2/ --miner.gasprice '0' --mine --unlock '0xba29719495dd600B9ea835425EF3820E03AcA67e' --password node2/password.txt --syncmode 'full' --port 40311 --http --http.port 8502 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+node3 - miner 
+enode = "enode://f865d0ddbff352285406d328f0367b6516cbd74a415b29a47bcedcfa6329a60b99fbc2a7062be8d6d6ee25b0c81d2637e6a759cf85ee405259b19e00ea0e8753@127.0.0.1:40312?discport=0"
+run = 
+geth --datadir node3/ --miner.gasprice '0' --mine --unlock '0xad8A601b848562C63826f04d2a8d44dd33E320b4' --password node3/password.txt --syncmode 'full' --port 40312 --http --http.port 8503 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+
+node4 - miner 
+enode = "enode://37e8c724b33d8e93e4b2d6f22ee7d35510fd309cc40892bf2cedaffd6873d7658ec41b35436716ea3f9a183e0963559414ce3fd92416d6b33d73205be8df3d7a@127.0.0.1:40313?discport=0"
+run = 
+geth --datadir node4/ --miner.gasprice '0' --mine --unlock '0xf45dDc96E9Bdf95A8aE1Ad198B649731A2311966' --password node4/password.txt --syncmode 'full' --port 40313 --http --http.port 8504 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+node5 - miner 
+enode = "enode://cf4bbd9c70745c2905705c21f7aa3bb617bd01d86e527c38dad08de414299f06735150d630a6ec76298e3be5fb007d6f5126022a4dbdb4f2e227a25e7078b3a8@127.0.0.1:40314?discport=0"
+run = 
+geth --datadir node5/ --miner.gasprice '0' --mine --unlock '0x137349718279Ec6FF357f93BAd699e4B0487708c' --password node5/password.txt --syncmode 'full' --port 40314 --http --http.port 8505 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+node6 - miner 
+enode = "enode://326e55d3d0f8503823d744e7bd6b79a613cd4eac76e7a52e79b656db06d417a61864fd91647bbc24cdfb7a3fcb7b54727f9e0b6801bd12e592d869f04a250ec9@127.0.0.1:40315?discport=0"
+run = 
+geth --datadir node6/ --miner.gasprice '0' --mine --unlock '0xdAb0BD59Fa7FfC017Fc30d0BdcECA26161cBDDc0' --password node6/password.txt --syncmode 'full' --port 40315 --http --http.port 8506 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+
+node7 - miner 
+enode = "enode://8636c85f4434e99bae54763dcece2361fe81dd45ac44187304f06e17b9fe06ad73bba8edbff892957e5539990d68c662c944f5c5ea9b32659678445d4aa79ca9@127.0.0.1:40316?discport=0"
+run = 
+geth --datadir node7/ --miner.gasprice '0' --mine --unlock '0xebb823a25982A09C333dDcD7bD0C1B7a98B4487A' --password node7/password.txt --syncmode 'full' --port 40316 --http --http.port 8507 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+
+node8 - miner 
+enode = "enode://2c7638e468e5a9006f80f0fc6587889b72ead49bd2488d34045c02f3bd18d6be46ad938bd97391c392c3d95e8c1ec1103fa94f478458bfefa810cb9d971ff4fc@127.0.0.1:40317?discport=0"
+run = 
+geth --datadir node8/ --miner.gasprice '0' --mine --unlock '0x93761161579C09B779534817a238B061Fd030D28' --password node8/password.txt --syncmode 'full' --port 40317 --http --http.port 8508 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+node9 - miner 
+enode = "enode://dbcf9b3993c1e7104ad8a1f399619aa0c9f4c8c7d13375719a092b94e979f84f521adb43d4bc1bfa824c6f67778d70840e3a0761f1eb1c5d245703dffb142c83@127.0.0.1:40318?discport=0"
+run = 
+geth --datadir node9/ --miner.gasprice '0' --mine --unlock '0xECAD33eD2bCf935208f6686e3861f1b06a4c60eA' --password node9/password.txt --syncmode 'full' --port 40318 --http --http.port 8509 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+
+node10 - miner 
+enode = "enode://4b83dd37efddadeffe3ee01909f25df6d0488b7eab94debcce35a31ed0afa831904d77e46e846497188ecc03a5d624732e5e8b722bb2dbe5731670954ee730f2@127.0.0.1:40319?discport=0"
+run = 
+geth --datadir node10/ --miner.gasprice '0' --mine --unlock '0x86e620dE0C166A1A619a9662522dAF45E3ca1AA6' --password node10/password.txt --syncmode 'full' --port 40319 --http --http.port 8510 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+
+
+node11  
+enode = "enode://f03fa3ccf5a2275e4a44f1b7a00d180537b06eacd528fe3f93fe83bf19f08e77ec1c0d834c6a4119e80a462ef4a780691d45722d4e78da3d58aca5c88e75468b@127.0.0.1:40320?discport=0"
+run = 
+geth --datadir node11/  --unlock '0xaD6F9d034b3aF063cA6f4c885c50638142be432C' --password node11/password.txt --syncmode 'light' --port 40320 --http --http.port 8511 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node12  
+enode = "enode://f83539489a0f5a3a88775ddb8b6d4e5c92430823b795c55fb748a7623725cf14f934ec422b98a86900dbd687a8c1994bdfb96a7202f089a172783df48f8c627e@127.0.0.1:40321?discport=0"
+run = 
+geth --datadir node12/  --unlock '0x0075caBdb73e6A19D6b233842F7fBFb0902b53eF' --password node12/password.txt --syncmode 'light' --port 40321 --http --http.port 8512 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node13 
+enode = "enode://e208c32e7ffce09d7e739b27753727b35992cf7a93a33156148b346ae755f4eef196ef9f1b7d48a1e58a59dac56c9818faa3c82c6e3873665e85a5d888eba99e@127.0.0.1:40322?discport=0"
+run = 
+geth --datadir node13/  --unlock '0x5e9f47d9906DDB413ECD7b83DFC6ee117732f67E' --password node13/password.txt --syncmode 'light' --port 40322 --http --http.port 8513 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node14  
+enode = "enode://75464873bfd57e467b52f65c87b74f577a23d4b8a86e19251d3ba8b92c8d6379a1b7cec06e17341abf9945909c35db26b144ad7f0a9c1551bbdc6d7b29888c6d@127.0.0.1:40323?discport=0"
+run = 
+geth --datadir node14/  --unlock '0x9061CF5d7636609798ea7936c1e86a2F405bE0b9' --password node14/password.txt --syncmode 'light' --port 40323 --http --http.port 8514 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node15  
+enode = "enode://3a3d4f177da7a445b13d473013a35a7d888b804f574728019833c593c71fafa6483a2f449f8565e5c79b0a143886367b555107f5013e24b74b84ede320c5eb41@127.0.0.1:40324?discport=0"
+run = 
+geth --datadir node15/  --unlock '0x20730590F6fb13e495837b295049A62A8f94033E' --password node15/password.txt --syncmode 'light' --port 40324 --http --http.port 8515 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node16  
+enode = "enode://05e9148cf08db0252357217683a0470e623c12a25034b818a670cec32dbe0e876c845dd8ac52d75a075f6b9c63f8931bf686447951bb7bcd05b04411265b3d9a@127.0.0.1:40325?discport=0"
+run = 
+geth --datadir node16/  --unlock '0x1d5cB7A4041Fbb30Ab7A1120C8f35c28848E8bEA' --password node16/password.txt --syncmode 'light' --port 40325 --http --http.port 8516 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node17  
+enode = "enode://506384ae4a57e94f72c6fdce62c4f87a9c6649d92d51547f85172d0c904a6a638e92368ba87c747dbbb73bb6bb0722bdeb32f2f44415a52deb8c473b62fa21ea@127.0.0.1:40326?discport=0"
+run = 
+geth --datadir node17/  --unlock '0x66D4c09553ACC17a9651b3a9da4FB9d2E387eb1E' --password node17/password.txt --syncmode 'light' --port 40326 --http --http.port 8517 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node18  
+enode = "enode://a1fe6be22b5c8ebfeea31c16d72782ebae0e1e2d7ba5b9fd6beea2c8f17406b199aa56c25aabdc10b5282ec599795f44a909a425c7b8c4d993b1c17ccab61dd5@127.0.0.1:40327?discport=0"
+run = 
+geth --datadir node18/  --unlock '0xe67a412633484DA5095b52Df40B48479aF8b2635' --password node18/password.txt --syncmode 'light' --port 40327 --http --http.port 8518 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node19  
+enode = "enode://66c36d5fe112eef264464f615c89b13afb1467cca4b9e82c2909094ac0f193744f4bcf59d589cc64df542a849c768fe316b8476360f943a351ca7f7310385667@127.0.0.1:40328?discport=0"
+run = 
+geth --datadir node19/  --unlock '0xB93831D8675aC0c1a8d580aFF8717358BBCe9789' --password node19/password.txt --syncmode 'light' --port 40328 --http --http.port 8519 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node20  
+enode = "enode://9c1d6152732624670cf0d01ccbf2fce6a6ce132e98edd455f4d3c8c248f29875c48d6beb369695064fc729d46e5f0f63bdaa2d16841006e9cf0eed8c77ecbaed@127.0.0.1:40329?discport=0"
+run = 
+geth --datadir node20/  --unlock '0x6c51f694e7152877287Ba3F73613C749488f9059' --password node20/password.txt --syncmode 'light' --port 40329 --http --http.port 8520 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node21  
+enode = "enode://dd7c83084353b70d3a07b6c08a9cf9e77816cc006a0f85e6cc001ff650ed4a2bd00844252387184a247926c2f7362f526af3b3ee0dd2a7b5a5b526825f7c920b@127.0.0.1:40330?discport=0"
+run = 
+geth --datadir node21/  --unlock '0x9af65160D865be449e28858FE4139Dbc4CB3Cd86' --password node21/password.txt --syncmode 'light' --port 40330 --http --http.port 8521 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node22  
+enode = "enode://21acdaa1469fb3a4442f45151faf8b3dea78ffaffbe02e32d00f96727cc025444d8d98e4f6ccc8cda0bd3dc05e60a5035fb3faa34ac894b0973a90e24c6b64c4@127.0.0.1:40331?discport=0"
+run = 
+geth --datadir node22/  --unlock '0x254b1a0B38a9A1c1fD08C123479989BDDc349Bf1' --password node22/password.txt --syncmode 'light' --port 40331 --http --http.port 8522 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node23  
+enode = "enode://d0a8c5aa26cbe5de8ad792e804e88f32df056f5d0d0eeb55112df8911000a0f6774b458f89f079c02323f74a180c856ebe2afee7759dc14d21182e9997d752ed@127.0.0.1:40332?discport=0"
+run = 
+geth --datadir node23/  --unlock '0xEa20be133c1C6A1dC3CEE0C81BE779a1D83978F5' --password node23/password.txt --syncmode 'light' --port 40332 --http --http.port 8523 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node24  
+enode = "enode://b5112bbab5b45e97ba2df7856e6b164409d4fb2fd3db396839345a88d254d1c1f3c0abff71e81bcd0842cd7e7e5d08f0de631831da6c1831e10c9f8d4181390b@127.0.0.1:40333?discport=0"
+run = 
+geth --datadir node24/  --unlock '0x644E28fc0C4fc7a544f5cF3e1C183fc5718C223E' --password node24/password.txt --syncmode 'light' --port 40333 --http --http.port 8524 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node25  
+enode = "enode://3c00731a7cd3445fb533f0b25a773030afee888564c35fcaed613279c6d3d34c4db61a350bcf12089d5f75585a173bacb86a36575b6519b1c5c13921d76b545f@127.0.0.1:40334?discport=0"
+run = 
+geth --datadir node25/  --unlock '0x82ef6397c3c9B1a27218aFB66814dBBe03B0040B' --password node25/password.txt --syncmode 'light' --port 40334 --http --http.port 8525 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node26  
+enode = "enode://f852c6c862aa962e240ad3ac2e2e58af0cab76fe09887ff20ad0150696028870fecd97674120901d82cd4e8b0ab1e44cad817446bcbf53bea11d73a630554d37@127.0.0.1:40335?discport=0"
+run = 
+geth --datadir node26/  --unlock '0x43C0df624ED9919b9a77eDADdBb45A40Bbb18C2a' --password node26/password.txt --syncmode 'light' --port 40335 --http --http.port 8526 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node27  
+enode = "enode://20f50379340ae578216e7532f813711f5bb0f953a57188c1c346f019ed676e454c196ec018a2103074c07a9b4bca38460b0ad1e810dcb33e0091711dc362b4c8@127.0.0.1:40336?discport=0"
+run = 
+geth --datadir node27/  --unlock '0xd37795472CBD1f1EFF6043fF7405161239C66116' --password node27/password.txt --syncmode 'light' --port 40336 --http --http.port 8527 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node28  
+enode = "enode://ee1c6d9b65a9e07ffa1ff9e6713bfa28896e1dce44844daa8887e2928b228523df5dedccbb02170dae8256379fc1f385240b65f5a474e0a3410c7ef53680a9ec@127.0.0.1:40337?discport=0"
+run = 
+geth --datadir node28/  --unlock '0xE966253585aa61c022542F7Ad80f4d12f8e8D423' --password node28/password.txt --syncmode 'light' --port 40337 --http --http.port 8528 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node29  
+enode = "enode://0c855458b7d9f4a4e3a2ad02a00a179076e2977e7ff30292b4abf98a13ce09021fced0ff8dd4f18a4914e4293c99d35f202d0ab9509ac6dae7fa2971556b9b0d@127.0.0.1:40338?discport=0"
+run = 
+geth --datadir node29/  --unlock '0xea0CD8ac55F0AB59565792574c72Fe41dD2D81Ec' --password node29/password.txt --syncmode 'light' --port 40338 --http --http.port 8529 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node30  
+enode = "enode://0152ccfd924c7e724988b8cd943251f7d943c984a73e202efc84463d764ee35ebb4e5d29842668087021f126fea09105a38fecfe18c8333a88420851552dbda6@127.0.0.1:40339?discport=0"
+run = 
+geth --datadir node30/  --unlock '0x841a04047998b0c9B70Affc7656E3f775EfB3AcD' --password node30/password.txt --syncmode 'light' --port 40339 --http --http.port 8530 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node31  
+enode = "enode://674573dca5cd22ed70001e9b4ba557a0538f4b1a0881640fe9b61260345760979c04a8b8da84bed86f2e52a0db3d7f66a42bda22ac36310d9fd746fd5d7d8b46@127.0.0.1:40340?discport=0"
+run = 
+geth --datadir node31/  --unlock '0x6cCe78B991007d4543EC237204447F1Ac86b9948' --password node31/password.txt --syncmode 'light' --port 40340 --http --http.port 8531 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node32  
+enode = "enode://c233c506afa46c4e49978c4e414d9ebb05c7fbfafdaf5766b24fc72a7734fc220fd02c0ecc9c9cb27c722f376af41b5ba55c117084f08894a63cdc8603e470af@127.0.0.1:40341?discport=0"
+run = 
+geth --datadir node32/  --unlock '0x1B311AF7486FeD63c5Beb6133731022928623d23' --password node32/password.txt --syncmode 'light' --port 40341 --http --http.port 8532 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node33  
+enode = "enode://217bf04dc4a8b4571c37b2853f83d7094b111227f8bef2fb5c61ae18532fd14522afbec5221e0590ae51cf65e9ac8f51d75de4a47526495642d9a020ee134144@127.0.0.1:40342?discport=0"
+run = 
+geth --datadir node33/  --unlock '0x35c7d2375E021fBf5A75976698d6297E2721a104' --password node33/password.txt --syncmode 'light' --port 40342 --http --http.port 8533 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node34  
+enode = "enode://ca26bb62667d8c85777f9949a1c21eb92c61b5c1a803dad882e1304a8b700b5237c8b3564509155622fa682dcaa134bdd8dac9c4cd91ae82de6bbb7741324beb@127.0.0.1:40343?discport=0"
+run = 
+geth --datadir node34/  --unlock '0x8FA0d436EB5aED1b1486A4984768B01Bd336a0fe' --password node34/password.txt --syncmode 'light' --port 40343 --http --http.port 8534 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node35  
+enode = "enode://21afbb328ab13c61e6e9a9da9e0bd1a075b0a0eae084d878cc96a41de0d8fa6574872c8bcacd0f9c6b1dfeef1045d07a9cb4d094e1f17b389680c1fc5c8e4d5b@127.0.0.1:40344?discport=0"
+run = 
+geth --datadir node35/  --unlock '0x51aC6885f6a2d1FC033B3aCcC4DD7367E3fA7ac7' --password node35/password.txt --syncmode 'light' --port 40344 --http --http.port 8535 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node36  
+enode = "enode://c3280aafb4d97cdb3c6095c73c4b02e489e2fdb3434053db0a84c113cf109fe903fcdaa4bfd1e77812d907c05865e846e36bfb33df7803f609d061e2621e5a7e@127.0.0.1:40345?discport=0"
+run = 
+geth --datadir node36/  --unlock '0x6358F6198CD4caBedEe7304088430CA0938c8FE3' --password node36/password.txt --syncmode 'light' --port 40345 --http --http.port 8536 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node37  
+enode = "enode://312b09b0a5edc334fa09fe4d23fcea8b6099334875f834cef91b1872e64d07c74872fac6561eb114f9e0cf49883e4c4f7a551f11b35d5ab0d74eb1fc98df3398@127.0.0.1:40346?discport=0"
+run = 
+geth --datadir node37/  --unlock '0xD021E75F99CD114174501e4D27cb3e615dF90591' --password node37/password.txt --syncmode 'light' --port 40346 --http --http.port 8537 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node38  
+enode = "enode://c3a9217beca26dcecbd35b95e28cc981542830d637b1e885273973465f0e3abb961e3f1c3294a3b97ad856958f564113d903824bf137c51b62a78f4b7e25fb40@127.0.0.1:40347?discport=0"
+run = 
+geth --datadir node38/  --unlock '0xd1f9B212965D012CC8e6D2ddb4349c5E137D9a6C' --password node38/password.txt --syncmode 'light' --port 40347 --http --http.port 8538 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node39  
+enode = "enode://7f46ae766f75212216ac31532c6b9b2cd3f852db5058d08c565ba645a088b80d5ac9bf8f41b5d56360063a3a32e96a50f720451728d7379f584c7dd7dbf475f5@127.0.0.1:40348?discport=0"
+run = 
+geth --datadir node39/  --unlock '0x6c71c6175e8F516E79aBCE192B7657e00908E784' --password node39/password.txt --syncmode 'light' --port 40348 --http --http.port 8539 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node40  
+enode = "enode://ce65478a8039137c68ec99cd22bd6c54e86862a87db68ff3ae47c55aeee9804e3be53d835d673b92a3959c91d3f0a0a165bb0b85120a7f736988799cde097c70@127.0.0.1:40349?discport=0"
+run = 
+geth --datadir node40/  --unlock '0xc722600c6f9AF9D3b70fdB665CC812f2d78A1CA8' --password node40/password.txt --syncmode 'light' --port 40349 --http --http.port 8540 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+
+node41  
+enode = "enode://0458dbf13b8a2b6b5b57243d93af7bad40a413669fc091bcbc346c76a54351dbde5800b2405067627597a4d30925abc0e0168caeb69f44ef57d40acc9e4e1683@127.0.0.1:40350?discport=0"
+run = 
+geth --datadir node41/  --unlock '0x64D0e23ec4b426E24dEC7Afa32DDe39ba4f7413C' --password node41/password.txt --syncmode 'light' --port 40350 --http --http.port 8541 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node42  
+enode = "enode://7d97e7fb624d1a5fdbfe0ce8980009b4ff8546d640d976ef51279421b6e002875d4cdbe03df98ea47156866c1ea408b982a939c4e2349f97f6d07a1709d47ff1@127.0.0.1:40351?discport=0"
+run = 
+geth --datadir node42/  --unlock '0x638CF69eA29e9d9E01D7Af399D2642c4F3c88131' --password node42/password.txt --syncmode 'light' --port 40351 --http --http.port 8542 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node43  
+enode = "enode://c2310eee86baca40a05765e1abb6ecfb0bc42dcf9a6721441f0fdaf596a82ad145b8397bee57b40ad347ba87021d4c906d24bdca371f39ab3280cbc0b9747db3@127.0.0.1:40352?discport=0"
+run = 
+geth --datadir node43/  --unlock '0x4a3AF094Eb77D2ff7DE341b7656D0b458652E70B' --password node43/password.txt --syncmode 'light' --port 40352 --http --http.port 8543 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node44  
+enode = "enode://8404123235c1781b990a832515fa3a3b3ad7a44dede12717cdc97f1b0eb3bdf7986c9981b6fbb1ec952a012338a561e3bb6bc461ac9b74f4c5dc23c87d6fdc75@127.0.0.1:40353?discport=0"
+run = 
+geth --datadir node44/  --unlock '0x26298eA4f10d279e8573dC6a4C49205F1297D9d7' --password node44/password.txt --syncmode 'light' --port 40353 --http --http.port 8544 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node45  
+enode = "enode://f1147bdaf39434e8b5b4a72a6ea1d3a47e2f9a39de5b79e9a4a96d355a039e072d0bc10d34ceb5163396e60960da175db7caa1bc150d9c1b757023d6f8c2f4ae@127.0.0.1:40354?discport=0"
+run = 
+geth --datadir node45/  --unlock '0x182274Ecd611C8397C61cD01497f30eCfFb35A20' --password node45/password.txt --syncmode 'light' --port 40354 --http --http.port 8545 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node46  
+enode = "enode://d6f7d502dd3158bcb7a67b72b7244b1650a407aeba573bc00002bd02928563cd340757fe64e3d20fa16b507ca14efc45a073d6e7fcb543f3ce357bf1092bb0e2@127.0.0.1:40355?discport=0"
+run = 
+geth --datadir node46/  --unlock '0xf32BB43d8a94F1336BD62c65c45374C856F97794' --password node46/password.txt --syncmode 'light' --port 40355 --http --http.port 8546 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node47  
+enode = "enode://1ce237f24f391f35041219ae30545a3db1289f205ea9aae2564214c12ea56da4e2f11a322e2adcee82b7d8e361dc9d17bb6c240978eadd898bbf7b499696d617@127.0.0.1:40356?discport=0"
+run = 
+geth --datadir node47/  --unlock '0x017DA31B0203caAb361F4e8cBE1D1BEfd46aFE69' --password node47/password.txt --syncmode 'light' --port 40356 --http --http.port 8547 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node48  
+enode = "enode://66b15978419e7b3727b9706ff4cafe4e3c6ce58b27f9966e013701643b68ee11e67f7923c6c3d2f8e9f5df7355be78948fe18d8db190a5a25fc432b8b309daf4@127.0.0.1:40357?discport=0"
+run = 
+geth --datadir node48/  --unlock '0x1Db6E6575650c3ED8BFCA8c76d6150F7FA432707' --password node48/password.txt --syncmode 'light' --port 40357 --http --http.port 8548 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node49  
+enode = "enode://96167665bfb63f5f11c5f584f2665328ffab4082567bcf47eedeea39a4ad57a134501d7d8031296309abcc0674cff60a1217793395f2c34f8dabb14862134e8c@127.0.0.1:40358?discport=0"
+run = 
+geth --datadir node49/  --unlock '0x42501EbAE83fC8825FcbE76732250749Fc66c721' --password node49/password.txt --syncmode 'light' --port 40358 --http --http.port 8549 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node50  
+enode = "enode://dd37c8f53e6c7fb25fa7c7c943212b3f9d0a8cc812c371bf27424c574afd1738350a46f277e0755a9d50d3dd422b90544c3ceb76e6da05f3f6dae691de980cfe@127.0.0.1:40359?discport=0"
+run = 
+geth --datadir node50/  --unlock '0x9DF6a49E9A69FB81ef4B8A4e98D78B55DBdE2A2C' --password node50/password.txt --syncmode 'light' --port 40359 --http --http.port 8550 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node51  
+enode = "enode://cfe2a21a21847b0571dd26c22b78922fac1b055f3c0bd6fe1be1886e80efe1f6b43ff4c572a566f124820a9c0c42fc061d7269c402755c35fee932b97c5da37c@127.0.0.1:40360?discport=0"
+run = 
+geth --datadir node51/  --unlock '0x2dd07B9Eb261F0f4546fdD8766F29d4b8E7C155C' --password node51/password.txt --syncmode 'light' --port 40360 --http --http.port 8551 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node52  
+enode= "enode://028495917e4132e992f4a214aa45eea1b8aa9522b5b56e55f8ef6d00594985a8c441658535a842f9c2c78072bd19fd620d552a642743b057b1492e480dfac3d2@127.0.0.1:40361?discport=0"
+run = 
+geth --datadir node52/  --unlock '0x2bC0042c1D49e8Bd764879EE6e9e2cA1CA9cafB7' --password node52/password.txt --syncmode 'light' --port 40361 --http --http.port 8552 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node53  
+enode= "enode://a20a7c64b5fdcfff3c0aa3e5cbb010e230f3a35f5d996ffc5bcb1d68b4f8c7ea1c2f81224bc153677b72b8e592351c9c92d85e0e4137d2e8c327b6435d297c7e@127.0.0.1:40362?discport=0"
+run = 
+geth --datadir node53/  --unlock '0xE9389e6CD65020DF5d38193747aad9D6a8daFF6a' --password node53/password.txt --syncmode 'light' --port 40362 --http --http.port 8553 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node54  
+enode= "enode://9f7225232ee751059cb9de0913bda8dc56b714cb2bcd903a2aee08f6806b7206e8c6e4d81dd8d85241be66fbd48323a790895ac9939ee2fa8193329b6c3c859c@127.0.0.1:40363?discport=0"
+run = 
+geth --datadir node54/  --unlock '0xA2C3d2D10aa5B80B1ca978b0417ba629c4cE5158' --password node54/password.txt --syncmode 'light' --port 40363 --http --http.port 8554 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node55  
+enode= "enode://6a613be3e5f769108a18d5e2d6b0c3a8d11e70524933dc3353a530445cf3612cbaf47742d3f949e5cccaf4928caa2aafb9f6efd3f6aa9c1522eece06a5120ecf@127.0.0.1:40364?discport=0"
+run = 
+geth --datadir node55/  --unlock '0x03c574649C6DA8D928C743a2D900Eaa4402EBD49' --password node55/password.txt --syncmode 'light' --port 40364 --http --http.port 8555 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node56  
+enode= "enode://74a27fb5d592cb016d83c0ac87a1f4ec790834c9e5aa735f4ea93e210eaacfdcce9f4bcd326a408dfac8254cf88d0d32ffbc9f5b499ad9a7120a5c8df1100b9f@127.0.0.1:40365?discport=0"
+run = 
+geth --datadir node56/  --unlock '0x08292e584Cd94B8bCc005B19345D81899D4a9d2F' --password node56/password.txt --syncmode 'light' --port 40365 --http --http.port 8556 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node57  
+enode= "enode://26c97c7b4a848985b7682053d72eb0e5c0fea5d48979e195b3997067e17f671168e38b03f9e974d4afc9b4fd88816593326fed2df5eb09e6c6ed8e0759c8bd3a@127.0.0.1:40366?discport=0"
+run = 
+geth --datadir node57/  --unlock '0x5B1eE5524a8465F05C250be13713e1cC95123319' --password node57/password.txt --syncmode 'light' --port 40366 --http --http.port 8557 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node58  
+enode= "enode://e98c44aa6ce46e01dfe20687f23cee28c0b465cb6b6741d0f49ed74874bac6a0b073623dadfba1cd4ac8ae28f1707fbad91ad609182a84832c0065aebbd27d26@127.0.0.1:40367?discport=0"
+run = 
+geth --datadir node58/  --unlock '0xf178D2Ac40030f57A70D6B804b5D52A006d3f63e' --password node58/password.txt --syncmode 'light' --port 40367 --http --http.port 8558 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node59  
+enode= "enode://a77da15b1865162176a1187525f036f9699d12ecb7368190d9e53063c88d5bff3a0a1e58f6e539845415c00e40ce0a042c44d31ba042b2fe091eff02ee3b789f@127.0.0.1:40368?discport=0"
+run = 
+geth --datadir node59/  --unlock '0x19A5206F6A0dDDC16CCDe83Bc84b50f477c7c9e8' --password node59/password.txt --syncmode 'light' --port 40368 --http --http.port 8559 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node60  
+enode= "enode://48d9f7fb600a369cc6b62099d9066ea722c59dcc82e19a04ea10c32a285c91cc9e99681de1e36ab7cc1d0a4a0de82d2e3e2dcefcdb2bc6a4ec6309a66bbb019d@127.0.0.1:40369?discport=0"
+run = 
+geth --datadir node60/  --unlock '0x15e05A93a438591128716AFa9Bb9cc2edDC70656' --password node60/password.txt --syncmode 'light' --port 40369 --http --http.port 8560 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node61  
+enode= "enode://a4c208531de8dce5fcc904ca8fba5946f3d86e17b7b46047bace0956eec05b9d569d65bbca10725afad2f84240dd9e0e0fce0b580629ef0b3e703581993576d0@127.0.0.1:40370?discport=0"
+run = 
+geth --datadir node61/  --unlock '0x0E712c0cD8E867778EA524BAE535E89b590D9D5c' --password node61/password.txt --syncmode 'light' --port 40370 --http --http.port 8561 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node62  
+enode= "enode://9a988abd7d98fc1dbea714c9f150b193d3d12090a1fe38e8492152275f0546fb4b78abb6c179d7be2716a707694074556bca8eccb4f2c0b776cc4816266bc0dd@127.0.0.1:40371?discport=0"
+run = 
+geth --datadir node62/  --unlock '0x1C02dC15A2DAfF01682918D6C1b46907b6Ec2a01' --password node62/password.txt --syncmode 'light' --port 40371 --http --http.port 8562 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node63  
+enode= "enode://252c5bfbd4e4a25bffd9be0d3e38ad0291c64255159f505dc10d2eba171eb77f90b2d77b7456cba43cb4a73670241c216587704c7616e4feb5f0e31e3a5c5e0e@127.0.0.1:40372?discport=0"
+run = 
+geth --datadir node63/  --unlock '0xA46F4BAdF24D62B2139027Ebab9FF932E8c12d1a' --password node63/password.txt --syncmode 'light' --port 40372 --http --http.port 8563 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node64  
+enode= "enode://16bf9fe58fff7faf8462cad558be59c1f0777356191a95a082bc0804facf219479389c13563ec849970afdbdad12357f4999b89e5e1f3ffa38e033095a2bbb90@127.0.0.1:40373?discport=0"
+run = 
+geth --datadir node64/  --unlock '0xF34DB325159Def10E0617499A65672aA668bC544' --password node64/password.txt --syncmode 'light' --port 40373 --http --http.port 8564 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node65  
+enode= "enode://011f145352855eee54547897f212610ce4ae1d4ab3e03f5d0ac6d992b43071cbe8a885c86dcb9d1cf7506df84324ae823d003220059fac3e537562c5f375548c@127.0.0.1:40374?discport=0"
+run = 
+geth --datadir node65/  --unlock '0xBD22194D44B634b2102d1c0E43fE904dA9c298c4' --password node65/password.txt --syncmode 'light' --port 40374 --http --http.port 8565 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node66  
+enode= "enode://d66a0635417fbc025f8147b297a18ad9c234cb9b45b258457c1f812bf854adcd87b780e739ba49705c3316b0b1913c1e70fffd5e50ef867305986e1c68794c6f@127.0.0.1:40375?discport=0"
+run = 
+geth --datadir node66/  --unlock '0x614a2fd203648e1354668654D2BA9Ed4D6187cB7' --password node66/password.txt --syncmode 'light' --port 40375 --http --http.port 8566 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node67  
+enode= "enode://870d9546bc093cce8a1749e91322d4687bf497eb874f6437de573daca06670df71a53ea4ce9129acd91122e42ddafa0b8be25d55af5d81f87071b043796dfa16@127.0.0.1:40376?discport=0"
+run = 
+geth --datadir node67/  --unlock '0x1c89B8E7f3d73338656Fa64179ECb1F8fC08cc35' --password node67/password.txt --syncmode 'light' --port 40376 --http --http.port 8567 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node68  
+enode= "enode://40de86cf49cba7e183ede134fe65875a3f2063723a13a162d032c2efb95b67ab29a1d6e8e05f4ee4480443d185ffa7a7513e7da5770968e798bb3121b87702ad@127.0.0.1:40377?discport=0"
+run = 
+geth --datadir node68/  --unlock '0x29A99d555dFC72261661DBd176a1dc82EAb4151C' --password node68/password.txt --syncmode 'light' --port 40377 --http --http.port 8568 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node69  
+enode= "enode://80c786fbbb5c7089130851ca966ddc926c10cea66e30ed3c7d5805844e3eac24e49c581b8b4b7069eafaa3df2159df12813921653b905de1ab06f53811618627@127.0.0.1:40378?discport=0"
+run = 
+geth --datadir node69/  --unlock '0x02271fb8519eeaA6b20B28490CB5bc28E9A627B7' --password node69/password.txt --syncmode 'light' --port 40378 --http --http.port 8569 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node70  
+enode= "enode://fd3c26beafa8d2dbb226d333b1403a2dfe94ed7b54a85abe9505662bbd48533e9bd2785767081fe20248aab92ec24d6fa606251d2e0f65d9506c310336913a5d@127.0.0.1:40379?discport=0"
+run = 
+geth --datadir node70/  --unlock '0xC60257e93C0a62610784E04252333274201Ef04B' --password node70/password.txt --syncmode 'light' --port 40379 --http --http.port 8570 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node71  
+enode= "enode://d7b3fc282d75d400adebb1a925bf16a76ea8d77c1eab75c440c3d151d388dd09c70bbaba557a0bd007c48a99d3a9c7af1c3aa22f9bd3e7d52656e60fe83b7303@127.0.0.1:40380?discport=0"
+run = 
+geth --datadir node71/  --unlock '0x0729d377e1846610995a436c9DF2AaD9C8B9BD88' --password node71/password.txt --syncmode 'light' --port 40380 --http --http.port 8571 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node72  
+enode= "enode://36e171ea64b43d878970f17e5cad57c3c63dce07d7ed8f776723e259d245c14a430f0b373b5730499e1241af0b5770e2baf618d1d5cc9d9075b260250ebba339@127.0.0.1:40381?discport=0"
+run = 
+geth --datadir node72/  --unlock '0xADE3B2d8BB7034745442F125E1b838df6808FeB2' --password node72/password.txt --syncmode 'light' --port 40381 --http --http.port 8572 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node73  
+enode= "enode://4070e128c09b7dc5ed0cbdac64a99a0ae3cbec0464a90352c72a881eae4448194589a8113124eb76eca51394a3bb0ce15fd3eb8dba8da1cce2d704be8e98f450@127.0.0.1:40382?discport=0"
+run = 
+geth --datadir node73/  --unlock '0x80569cD39A2f0d58921F0BcE5096e06B39f236E6' --password node73/password.txt --syncmode 'light' --port 40382 --http --http.port 8573 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node74  
+enode= "enode://0d553933b3827df790cf70bfb4a0731b6d8228985b816a7b3327ab033c014286ad731c4909056c94f1c5275da795312fdde3fbe1cdbde3946c733684e17a2bc4@127.0.0.1:40383?discport=0"
+run = 
+geth --datadir node74/  --unlock '0x8e212BB7dF5Dae1d37690943c958906711391851' --password node74/password.txt --syncmode 'light' --port 40383 --http --http.port 8574 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node75  
+enode= "enode://332f49c290b232277243b777a640af5e87f60c6cc8346588363f1d079070967a3e4e0c3d95165783388f5b5da8833c8a03a74a9b6c48b2a44665522c5ae6cfe0@127.0.0.1:40384?discport=0"
+run = 
+geth --datadir node75/  --unlock '0xfDe2805aC76411A840F3e0898E789351bdF6a0fE' --password node75/password.txt --syncmode 'light' --port 40384 --http --http.port 8575 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node76  
+enode= "enode://77049b4bc79dfb5f3eb5c7fd5c5fa72b2f2b44912f395013c2c2612b1e89dbeabb71271629cb0b3348de7557f7b55169ffd3c72cfa2273e6afd22f76c503a336@127.0.0.1:40385?discport=0"
+run = 
+geth --datadir node76/  --unlock '0x20976D194D3d3e7f805E785FB73F52CDA0110fB6' --password node76/password.txt --syncmode 'light' --port 40385 --http --http.port 8576 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node77  
+enode= "enode://69d326250d8ee005d72b3f383bd688242d38131a11d573d760f74f7b8244fd449467dee58490689b67d461943034712f0eb42ce8c43ca705f85dd36ac40d8429@127.0.0.1:40386?discport=0"
+run = 
+geth --datadir node77/  --unlock '0x840E7040A1BBB44DDDEB015d195ce5D6544fC885' --password node77/password.txt --syncmode 'light' --port 40386 --http --http.port 8577 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node78  
+enode= "enode://668818200742aa33f59c1202b52e1bc1c2734a8c066edf769cb0c3fc667cc56ce21a69d25b632d7f7c2e024bb79ea14fd2f1742c88398a70205152fcc9966497@127.0.0.1:40387?discport=0" 
+run = 
+geth --datadir node78/  --unlock '0x8CF9ba65ab71e669AAadA677831ada2c86FE3124' --password node78/password.txt --syncmode 'light' --port 40387 --http --http.port 8578 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node79  
+enode= "enode://f052531426d9d60d7e29072206ecc1cc38f5eeba85fdc8bbb73a24409e4754971e97385c99f86f889a0f518302a3a547bb1558946ae12204a8c05a15d15bb96c@127.0.0.1:40388?discport=0"
+run = 
+geth --datadir node79/  --unlock '0x30363BcfB8527d5EbDb260ad974161404b49817d' --password node79/password.txt --syncmode 'light' --port 40388 --http --http.port 8579 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node80  
+enode= "enode://91b29a5ccd0b2797b117cc525147f24321b5b6d94395bebff6a09051fad73256ddd16564c144fd33ddd5a8b00bccae1011699348bc08a014a85ff6bbab857f50@127.0.0.1:40389?discport=0"
+run = 
+geth --datadir node80/  --unlock '0x207B3EB4F9ad0160347D8CA492675fB85b747120' --password node80/password.txt --syncmode 'light' --port 40389 --http --http.port 8580 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node81  
+enode= "enode://c80191062bb5ab01287d2f1a6c1fb4c47587c42840e29aa9415dcc80c75b3683a721701b77dcf1beeb97816efbede2c5c37125048d8a4d13a53bba13643c314d@127.0.0.1:40390?discport=0"
+run = 
+geth --datadir node81/  --unlock '0x7cB62a1CCA1e03C9f6cA7E8c1B5657AA0F8eA2Ec' --password node81/password.txt --syncmode 'light' --port 40390 --http --http.port 8581 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node82  
+enode= "enode://65625671b7dfe685d8e848630bdfa16bab74e2b675c4a442da667a1611f1b47f575010a3dd3053359c08078e11a8d8a74b30324078b4bfa9725fa834391238d3@127.0.0.1:40391?discport=0"
+run = 
+geth --datadir node82/  --unlock '0x90fd51daf8e41B81B01e5E4A6246d34Ba834861f' --password node82/password.txt --syncmode 'light' --port 40391 --http --http.port 8582 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node83  
+enode= "enode://38201a59c5bb4efa514e571e29661fd3234b0c10374a191c0b9d0bea6cc8ac6643b775aa94175056abb53e61fd4ab40844cffc16fc9c1a1d74fb1a870d7ecc1e@127.0.0.1:40392?discport=0"
+run = 
+geth --datadir node83/  --unlock '0x1D8B8D334cEfB2c52169588F83f8141A56aEAE2A' --password node83/password.txt --syncmode 'light' --port 40392 --http --http.port 8583 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node84  
+enode= "enode://023604fa52fc5d25362c7083c8cdacd6408472b76b857488004ccf280174ff8fe6bbea42b42ae1f2c759511133d91746c901a9c65a41b2463f909c8c2f9932f1@127.0.0.1:40393?discport=0"
+run = 
+geth --datadir node84/  --unlock '0x723e7E1213afdCA6192e3FA58d8af3b3c5d4f853' --password node84/password.txt --syncmode 'light' --port 40393 --http --http.port 8584 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node85  
+enode= "enode://e70ac563bc0c3ff1cdb5e88278ccf15554e9c20afa15d95fc401c3382e9dc13e5d2e947a35a313404e1902841cd9ef9c225de2b9f5294c00c279605d327ad49e@127.0.0.1:40394?discport=0"
+run = 
+geth --datadir node85/  --unlock '0xc787e2818B2F01F2bcfB7d9C8c6532F1FBeDc0cF' --password node85/password.txt --syncmode 'light' --port 40394 --http --http.port 8585 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node86  
+enode= "enode://543ccc9a31c654b72dc6e543c5bd72cdf9656b81a28f9f6169efc9462f8ad1f2b9aab616498969a5a36d9690ddc47d07b8315bec4756b97ab8a98d23e7e682da@127.0.0.1:40395?discport=0"
+run = 
+geth --datadir node86/  --unlock '0xD1145cF5837bfb2eDA557F8D890B0f5Ba8E8F249' --password node86/password.txt --syncmode 'light' --port 40395 --http --http.port 8586 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node87  
+enode= "enode://ec5c01b76af16419667808f50d2543636f963615e7655a53a8a667fc9c1b6649c95a82918e3b9f800c044b7998cae1adddfe3a3d0ebca48d7e38234ce50995d0@127.0.0.1:40396?discport=0"
+run = 
+geth --datadir node87/  --unlock '0x63B225fa33B1eaC0E0024f447Ac508128477f67d' --password node87/password.txt --syncmode 'light' --port 40396 --http --http.port 8587 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node88  
+enode= "enode://bb846ef883bbf95bdbf3b13f6c499b837cfbd8cd28cdae0a1f40210297161a3c15d94268ae9a6e5cec628768f90be942104bb6e95e7c3736d0378d0830774d47@127.0.0.1:40397?discport=0"
+run = 
+geth --datadir node88/  --unlock '0xb376AD405ec347c5FC5D928D1c7481decb363bC2' --password node88/password.txt --syncmode 'light' --port 40397 --http --http.port 8588 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node89  
+enode= "enode://05c5668122b5a5ac55c4a7b6d9251914c35985ae2b6f75694797142cf4030f4894e49cff9c149d16d31837377865df21c408891ef9dda97c65773901268d2ef1@127.0.0.1:40398?discport=0"
+run = 
+geth --datadir node89/  --unlock '0xFe4202dd0Ce10B6cD27DCaBB0Ab38dd6D9C899e4' --password node89/password.txt --syncmode 'light' --port 40398 --http --http.port 8589 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node90  
+enode= "enode://1b92bb258cfb82e3b05a8dfe4ba7eeb7ea136dc3e8762aa2a514419d4fa10531cd062a0cfb05c4a9027dbe6a7944b17e0d7db3137bc3f5da26d57cd0a5f7e900@127.0.0.1:40399?discport=0"
+run = 
+geth --datadir node90/  --unlock '0x43eB1AFB8C886Ea9f3722dc5A96dc86716623B81' --password node90/password.txt --syncmode 'light' --port 40399 --http --http.port 8590 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node91  
+enode= "enode://c721161d3361309b78210a0c87b8f7abba5bff31f7c8aca045f85691d0435df581120c47c37c4338d992e11a83be1c8047ec779403748c3889b979e59fe00906@127.0.0.1:40400?discport=0"
+run = 
+geth --datadir node91/  --unlock '0x6199a814260732D4506bd2c1CA87601151aeb6A2' --password node91/password.txt --syncmode 'light' --port 40400 --http --http.port 8591 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node92  
+enode= "enode://4db5bc876ff428d62f9051019c0033bd8d6777daabf20a2e91dafe382ee9b20001111595338e89c0d970cd9202f398d1e425d91f19484f977f9b4f928ce5d6ed@127.0.0.1:40401?discport=0"
+run = 
+geth --datadir node92/  --unlock '0x8C19AE6303069cE8514a4670B121285dcB19C5A9' --password node92/password.txt --syncmode 'light' --port 40401 --http --http.port 8592 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node93  
+enode= "enode://121f00a239b4edfec2e62ba53e11062e481b0c1cad09a19199567d4d0cfbe8a47b4e858707f649fd41f7d95ca5dc28811961ea2270bf05732adc8b34ac149a5d@127.0.0.1:40402?discport=0"
+run = 
+geth --datadir node93/  --unlock '0x615E8BF4De1aA9A803a9A8b0791D04499b41ab0E' --password node93/password.txt --syncmode 'light' --port 40402 --http --http.port 8593 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node94  
+enode= "enode://4d640b801c9de2844e67ea0ac6f86b6e1e47ee850ec3c7f9296821904f1b6c93f77df9f5ed65fc4382708df1060a725d92b6580b39ec95acc72ac5bdc3efc796@127.0.0.1:40403?discport=0"
+run = 
+geth --datadir node94/  --unlock '0xAe6A090f1C96C524Bc73e4B7a9dbbE725C1030D5' --password node94/password.txt --syncmode 'light' --port 40403 --http --http.port 8594 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node95  
+enode= "enode://9ceccc2c9771acdba8a20f6eae8d2312be6b4f8a79102c84833a80cbcd697ad8d74ee79cee98963d74563132aabf99c95a9f9fdbf6de0001b6aca5a8dec99f89@127.0.0.1:40404?discport=0"
+run = 
+geth --datadir node95/  --unlock '0x9Ea3199A5f712DaBfD11167FEd10e56a545024fe' --password node95/password.txt --syncmode 'light' --port 40404 --http --http.port 8595 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node96  
+enode= "enode://9c7cbea286adb0eb77bccd613a32fa8e0da64f852e5909f455ecc181c56092772cb7c308a546ad54a43a7ec963b2e948f543f44d4816037d34ba7576e243f604@127.0.0.1:40405?discport=0"
+run = 
+geth --datadir node96/  --unlock '0xB20bCcf6452A613C738a8e5DB1cdD6aE197e5bCA' --password node96/password.txt --syncmode 'light' --port 40405 --http --http.port 8596 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node97  
+enode= "enode://0888723aeb8d61efe45a80e39fa15d508a92741ce01d8c6b4aaaae5238769ee9dbaa5ce9e073d852d832cd6e0175fb50752c545544534cf24899671c03acfd5b@127.0.0.1:40406?discport=0"
+run = 
+geth --datadir node97/  --unlock '0x65C0ae8A290b88fBf63871d3Fd2b24ebF3126DF9' --password node97/password.txt --syncmode 'light' --port 40406 --http --http.port 8597 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node98  
+enode= "enode://0c3ae50fecf9e032e901279f54c461f27eb460aab5e14d799bb1691f599862262782848e135a38c46f1266b9bbb31175617a96e530706cad9a00fe37013bfc6d@127.0.0.1:40407?discport=0"
+run = 
+geth --datadir node98/  --unlock '0xF7e0DCb0e6C098358077a7dc1a5F4f4b60e4E764' --password node98/password.txt --syncmode 'light' --port 40407 --http --http.port 8598 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node99  
+enode= "enode://7e0cb479c954342bd66a1738376a7d27b43b2caa6a05636c33da04a99933cd451ed8f46835fdc3ec9cc96bf8fad2feb9324f2121cce6d3279af5960e7643732d@127.0.0.1:40408?discport=0"
+run = 
+geth --datadir node99/  --unlock '0x6e8b07737222F6660922511c4d2Cb6285Fe9151E' --password node99/password.txt --syncmode 'light' --port 40408 --http --http.port 8599 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  
+
+
+node100  
+enode= "enode://6873596586b553b5b6e99af998ba71a0dd0c34d00ffd10513045caa089fb7fee3d4acd1b7312267e015c8853d030b2302721dd4a4d54bed382118ca3872e096d@127.0.0.1:40409?discport=0"
+run = 
+geth --datadir node100/  --unlock '0x57Acb1705DebBE8Fe79E224609b337f4EBD2b053' --password node100/password.txt --syncmode 'light' --port 40409 --http --http.port 8600 --http.addr '0.0.0.0' --http.vhosts "*" --http.api 'debug,web3,eth,txpool,personal,clique,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3  

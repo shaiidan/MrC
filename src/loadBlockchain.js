@@ -1,5 +1,5 @@
-import Web3 from 'web3'
-import Permissions from './abis/Permissions.json'
+import Web3 from 'web3';
+import Permissions from './abis/Permissions.json';
 
 // get web3 provider form metamask
 export async function loadWeb3() {
@@ -18,22 +18,22 @@ export async function loadWeb3() {
 
 // get account and smart contruct
 export async function loadBlockchainData() {
-  const web3 = window.web3
+  const web3 = window.web3;
   // Load account
-  const accounts = await web3.eth.getAccounts()
-  const networkId = await web3.eth.net.getId()
-  const networkData = Permissions.networks[networkId]
+  const accounts = await web3.eth.getAccounts();
+  const networkId = await web3.eth.net.getId();
+  const networkData = Permissions.networks[networkId];
   if(networkData) {
-    const permissions = web3.eth.Contract(Permissions.abi, networkData.address)
-    return {account:accounts[0], permissions:permissions}
+    const permissions = web3.eth.Contract(Permissions.abi, networkData.address);
+    return {account:accounts[0], permissions:permissions};
   } else {
-    window.alert('MrC contract not deployed to detected network.')
-    return null
+    window.alert('MrC contract not deployed to detected network.');
+    return null;
   }
 }
 
 export function checkPrivateKeySuitableToAccount(address, privateKey){
-  const web3 = window.web3
-  const account = web3.eth.accounts.privateKeyToAccount('0x' + privateKey)
-  return address === account.address
+  const web3 = window.web3;
+  const account = web3.eth.accounts.privateKeyToAccount('0x' + privateKey);
+  return address === account.address;
 }

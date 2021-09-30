@@ -1,21 +1,21 @@
-import React, { Component, useState } from 'react'
-import Foother from './Footer'
-import Header from './Header'
-import Mrc from './Mrc'
-import IconUpload from '../images/icon_upload.png'
-import IconExit from '../images/exit_icon.jpg'
-import Error from './Error'
-import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
-import Dropdown from 'react-bootstrap/Dropdown'
-import Button from 'react-bootstrap/Button'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import './ShowPatientMrc.css'
-import Encription from '../Encription'
-import {loadState, saveToLocalStorage} from '../storage'
-import {loadWeb3, loadBlockchainData,checkPrivateKeySuitableToAccount} from '../loadBlockchain'
+import React, { Component, useState } from 'react';
+import Foother from './Footer';
+import Header from './Header';
+import Mrc from './Mrc';
+import IconUpload from '../images/icon_upload.png';
+import IconExit from '../images/exit_icon.jpg';
+import Error from './Error';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import './ShowPatientMrc.css';
+import Encription from '../Encription';
+import {loadState, saveToLocalStorage} from '../storage';
+import {loadWeb3, loadBlockchainData,checkPrivateKeySuitableToAccount} from '../loadBlockchain';
 import { Link} from "react-router-dom";
-import $ from 'jquery'
+import $ from 'jquery';
 
 class ShowPatientMrc extends Component {
 
@@ -30,7 +30,7 @@ class ShowPatientMrc extends Component {
       else{
         this.props.history.push('/');
       }
-      const state = await loadState()
+      const state = await loadState();
       this.setState(state);
       this.setState({showAddKey:true,loading:false});
 
@@ -42,36 +42,36 @@ class ShowPatientMrc extends Component {
   }
   
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       showAddKey: false,
       loading:true,
       showMrC:false,
       patientPrivateKey:''
-    }
-    this.permissions = null
+    };
+    this.permissions = null;
   }
 
     async addPrivateKeyAndLoadingMrc(privateKey){
-      this.setState({patientPrivateKey:privateKey})
-      let state = await loadState()
-      state = $.extend(state, {patientPrivateKey:privateKey})
-      await saveToLocalStorage(state) // save to the storage
+      this.setState({patientPrivateKey:privateKey});
+      let state = await loadState();
+      state = $.extend(state, {patientPrivateKey:privateKey});
+      await saveToLocalStorage(state); // save to the storage
       // get the mrc of this patient
-      await this.loadingMrc()
+      await this.loadingMrc();
     }
 
     async loadingMrc(){
-      this.setState({loading:true})
+      this.setState({loading:true});
       const mrc = await this.permissions.methods.getMrc(this.state.patientAccount)
-      .call({from:this.state.account})
-      this.setState({mrc})
-      this.setState({loading:false, showAddKey:false, showMrC:true})
+      .call({from:this.state.account});
+      this.setState({mrc});
+      this.setState({loading:false, showAddKey:false, showMrC:true});
     }
 
     async addEmr(details){
        // save in blockaing!!
-       this.setState({ loading: true })
+       this.setState({ loading: true });
        await this.permissions.methods.addEmr(details.owner,
              details.typeEmr,details.statuseEmr,details.time,details.data)
              .send({from: details.writer})
@@ -82,7 +82,7 @@ class ShowPatientMrc extends Component {
              .once('confirmation', (confirmation) => {
                this.setState({ loading: false })
                this.loadingMrc();
-              })
+              });
     }
 
     render(){
@@ -129,17 +129,17 @@ function AddPrivateKey(props) {
   }
 
   const handleSubmit = async (event)=>{
-    event.preventDefault()
+    event.preventDefault();
 
     if(privateKey !== undefined && privateKey !== '' && privateKey.length === 64
     && privateKey.match('^[A-Fa-f0-9]{64}$') && 
     checkPrivateKeySuitableToAccount(props.parent.state.patientAccount,privateKey)){
-        setMsgError('')
-        setShow(false)
-        props.parent.addPrivateKeyAndLoadingMrc(privateKey)
+        setMsgError('');
+        setShow(false);
+        props.parent.addPrivateKeyAndLoadingMrc(privateKey);
     }
     else{
-      setMsgError('Private key is incorrect')
+      setMsgError('Private key is incorrect');
     }
   }
 
@@ -168,51 +168,62 @@ function AddPrivateKey(props) {
 }
 
 function UploadEmr(props) {
-    const [show, setShow] = useState(false)
-    const [emrTypeValue, setEmrTypeValue] = useState("")
-    const [keyType, setKeyType] = useState(0)
-    const [keyStatus, setKeyStatus] = useState(0)
-    const [prescriptions, setPrescriptions] = useState(false)
-    const [emrStatusValue,setEmrStatusValue] = useState("VALID")
-    const [file, setFile] = useState("")
+    const [show, setShow] = useState(false);
+    const [emrTypeValue, setEmrTypeValue] = useState("");
+    const [keyType, setKeyType] = useState(0);
+    const [keyStatus, setKeyStatus] = useState(0);
+    const [prescriptions, setPrescriptions] = useState(false);
+    const [emrStatusValue,setEmrStatusValue] = useState("VALID");
+    //const [file, setFile] = useState("");
+    const [files, setFiles] = useState("");
 
     const handleShow = () => {
-        setShow(true)
+        setShow(true);
     }
+    // for open prescription if type ==2
     const handleSelectedEmrType = (event) => {
-        const key = event.toString().split(",")[0]
-        const value = event.toString().split(",")[1]
-        setEmrTypeValue(value)
-        setKeyType(key)
+        const key = event.toString().split(",")[0];
+        const value = event.toString().split(",")[1];
+        setEmrTypeValue(value);
+        setKeyType(key);
         if(parseInt(key) === 2){
-            setPrescriptions(true)
+            setPrescriptions(true);
         }
         else{
-            setPrescriptions(false)
+            setPrescriptions(false);
         }
     }
     const handleSelectedEmrStatus = (event) => {
-      const key = event.toString().split(",")[0] 
-      const value = event.toString().split(",")[1]
-      setEmrStatusValue(value)
-      setKeyStatus(key)
+      const key = event.toString().split(",")[0]; 
+      const value = event.toString().split(",")[1];
+      setEmrStatusValue(value);
+      setKeyStatus(key);
     }
+    // check file's type is only txt
     const validateFileType = (event) => {
-        var fileName = event.target.value
+        var fileName = event.target.value;
         var idxDot = fileName.lastIndexOf(".") + 1;
         var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
         if (extFile!=="txt"){
             alert("Only txt file are allowed!");
-            event.target.value = null
+            event.target.value = null;
         }
         else{
-          setFile(event.target.files[0])
+      //    setFile(event.target.files[0]);
+          setFiles(event.target.files);
         }
     }
-    const handleSubmit = async (event) =>{
-      event.preventDefault()
-      setShow(false)
-      const base64Data = await toBase64(file)
+    // send transaction - add EMR to blockchain
+    /** 
+    const handleSubmitUploadEMR = async (event) =>{
+      event.preventDefault();
+      setShow(false);
+      await sendTransactionEMR(file);
+    }
+    */
+
+    const sendTransactionEMR = async(EMR) =>{
+      const base64Data = await toBase64(EMR);
       const details = {
           typeEmr: parseInt(keyType),
           statuseEmr: parseInt(keyStatus),
@@ -220,10 +231,20 @@ function UploadEmr(props) {
           owner: props.parent.state.patientAccount,
           writer: props.parent.state.account,
           data: Encription.encrypt(base64Data,props.parent.state.patientPrivateKey) 
-      }
-      props.parent.addEmr(details)
-     
+      };
+      props.parent.addEmr(details);
     }
+
+    // multiple EMRs for analyze network (academic article)
+    const handleSubmitMultipleUploadEMR = async(event) =>{
+      event.preventDefault();
+      setShow(false);
+      for (let i = 0; i < files.length; i++) {
+        await sendTransactionEMR(files[i]);
+      }
+      console.log("all EMRs sent");
+    }  
+
     return (
         <>
         <div style={{paddingLeft:"40px",color:"blue"}} onClick={handleShow}>
@@ -272,11 +293,14 @@ function UploadEmr(props) {
                     <Form.Group>
                       {prescriptions ? <br/> : null}
                     <Form.Label>Add file</Form.Label>
-                      <Form.Control id="emrFile" type="file" placeholder="Upload File" accept=".txt" onChange={validateFileType} />
+                      <Form.Control id="emrFile" type="file"  multiple placeholder="Upload File" accept=".txt" onChange={validateFileType} />
                     </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-          <Button  type="button"  variant="submit" onClick={handleSubmit}>
+              {/* for real - upload just one EMR 
+              <Button  type="button"  variant="submit" onClick={handleSubmitUploadEMR}>
+              */}
+              <Button  type="button"  variant="submit" onClick={handleSubmitMultipleUploadEMR}>
             Add
           </Button>
         </Modal.Footer>

@@ -5,26 +5,26 @@ import { Redirect } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
-import './Mrc.css'
+import './Mrc.css';
 
 class Mrc extends Component {
 
   componentDidMount() {
     if( this.state.mrc === undefined || this.state.accountKey === undefined 
       || this.state.accountShow === undefined){
-        this.setState({hasError:true})
+        this.setState({hasError:true});
         // go to error!!
       }
   }
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       mrc: this.props.mrc,
       accountShow: this.props.accountShow,
       accountKey: this.props.accountKey,
      // keyAccount: 'dd7d78dafbd161a73400b076af946b5cb61f0c6875ba0e3c75ff17ac518a29b1',
       hasError: false
-    }  
+    };
   }
 
   // get columns bt type
@@ -45,7 +45,7 @@ class Mrc extends Component {
       columns.push({
         dataField: "status",
         text: "Status",
-        sort: true })
+        sort: true });
     }
     return columns;
   }
@@ -69,8 +69,8 @@ class Mrc extends Component {
     
     this.state.mrc.map(emr=>{
       if(emr.typeEmr === type){
-        const h = Encription.decrypt(emr.data,this.state.accountKey)
-        const fileName = "EMR-" + emr.time +".txt" 
+        const h = Encription.decrypt(emr.data,this.state.accountKey);
+        const fileName = "EMR-" + emr.time +".txt";
         if(h !== '' && h !== undefined && h !== null && type !== 2){
           emrs.push(
             {

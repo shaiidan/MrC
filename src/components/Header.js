@@ -9,7 +9,7 @@ class Header extends Component{
         super(props);
         this.state ={
             exit:false
-        }
+        };
     }
     
     render(){

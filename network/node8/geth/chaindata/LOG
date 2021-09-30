@@ -1,0 +1,32 @@
+=============== Sep 13, 2021 (EEST) ===============
+09:22:18.608890 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+09:22:18.613393 db@open opening
+09:22:18.614392 version@stat F·[] S·0B[] Sc·[]
+09:22:18.615664 db@janitor F·2 G·0
+09:22:18.615664 db@open done T·2.2707ms
+09:22:18.618675 db@close closing
+09:22:18.619174 db@close done T·499µs
+=============== Sep 13, 2021 (EEST) ===============
+15:27:10.169503 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:27:10.170503 version@stat F·[] S·0B[] Sc·[]
+15:27:10.170503 db@open opening
+15:27:10.170503 journal@recovery F·1
+15:27:10.174505 journal@recovery recovering @1
+15:27:10.179504 memdb@flush created L0@2 N·245 S·21KiB "\x02W\x9a..`\x88@,v167":"\xfc\x1c\xd9..\xa5Mv,v145"
+15:27:10.183506 version@stat F·[1] S·21KiB[21KiB] Sc·[0.25]
+15:27:10.192007 db@janitor F·3 G·0
+15:27:10.192007 db@open done T·21.504ms
+15:31:24.261198 db@close closing
+15:31:24.261697 db@close done T·499µs
+=============== Sep 26, 2021 (IDT) ===============
+13:34:40.580353 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+13:34:40.582674 version@stat F·[1] S·21KiB[21KiB] Sc·[0.25]
+13:34:40.582674 db@open opening
+13:34:40.583868 journal@recovery F·1
+13:34:40.588971 journal@recovery recovering @3
+13:34:40.592954 memdb@flush created L0@5 N·111 S·5KiB "Dat..ion,v247":"unc..own,v252"
+13:34:40.599407 version@stat F·[2] S·26KiB[26KiB] Sc·[0.50]
+13:34:40.612758 db@janitor F·4 G·0
+13:34:40.612758 db@open done T·30.0844ms
+15:24:04.752717 db@close closing
+15:24:04.752717 db@close done T·0s

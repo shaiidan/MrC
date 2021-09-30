@@ -1,15 +1,15 @@
-import React, { Component,useState } from 'react'
-import Footer from './Footer'
-import Header from './Header'
-import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import Mrc from './Mrc'
-import Error from './Error'
-import deleteIcon from '../images/delete_icon.jpg'
-import { loadState } from '../storage'
-import { loadWeb3, loadBlockchainData } from '../loadBlockchain'
-import $ from 'jquery'
+import React, { Component,useState } from 'react';
+import Footer from './Footer';
+import Header from './Header';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Mrc from './Mrc';
+import Error from './Error';
+import deleteIcon from '../images/delete_icon.jpg';
+import { loadState } from '../storage';
+import { loadWeb3, loadBlockchainData } from '../loadBlockchain';
+import $ from 'jquery';
 
 class PatientHome extends Component{
   
@@ -22,7 +22,7 @@ class PatientHome extends Component{
         this.permissions = blockchainData.permissions; // save smart contruct
         let state = await loadState();
         const newState = $.extend(this.state,state);
-        this.setState(newState)
+        this.setState(newState);
         await this.loadingMrC();
         this.setState({loading:false});
       }
@@ -34,26 +34,26 @@ class PatientHome extends Component{
   
   async loadingMrC(){
     // get all service providers have permission
-    const accessList = await this.permissions.methods.getServiceProviderPermissions().call({"from":this.state.account})
-    this.setState({accessList})
+    const accessList = await this.permissions.methods.getServiceProviderPermissions().call({"from":this.state.account});
+    this.setState({accessList});
     // get the mrc of this patient
-    const mrc = await this.permissions.methods.getMrc(this.state.account).call({from:this.state.account})
-    this.setState({mrc})
-    this.setState({loading:false})
+    const mrc = await this.permissions.methods.getMrc(this.state.account).call({from:this.state.account});
+    this.setState({mrc});
+    this.setState({loading:false});
   }
    
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
           loading:true
-        }
-        this.permissions = null
-        this.removeAccess = this.removeAccess.bind(this)
-        this.loadingMrC = this.loadingMrC.bind(this)
+        };
+        this.permissions = null;
+        this.removeAccess = this.removeAccess.bind(this);
+        this.loadingMrC = this.loadingMrC.bind(this);
     }
 
     async addAccessToServiceProvider(address){
-        this.setState({ loading: true })
+        this.setState({ loading: true });
         this.permissions.methods.giveAccessToServiceProvider(address)
         .send({from:this.state.account})
         .once('error', (error) => {
@@ -62,11 +62,11 @@ class PatientHome extends Component{
         .once('confirmation', (confirmation) => {
             this.loadingMrC() // update mrc
             this.setState({ loading: false })
-        })   
+        });   
     }
     async removeAccess(address){
         // revoke this address
-        this.setState({ loading: true })
+        this.setState({ loading: true });
         this.permissions.methods.revokeAccessFromDoctor(address)
         .send({from:this.state.account,gas:0})
         .once('error', (error) => {
@@ -75,7 +75,7 @@ class PatientHome extends Component{
         .once('confirmation', (confirmation) => {
             this.loadingMrC() // update mrc
             this.setState({ loading: false })
-        })
+        });
     }
 
     render(){

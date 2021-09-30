@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import './ServiceProviderHome.css'
+import React, { Component } from 'react';
+import './ServiceProviderHome.css';
 import { Redirect} from "react-router-dom";
 import Header from './Header';
-import Footer from './Footer'
-import Error from './Error'
-import {loadState, saveToLocalStorage} from '../storage'
-import {loadWeb3, loadBlockchainData} from '../loadBlockchain'
-import $ from 'jquery'
+import Footer from './Footer';
+import Error from './Error';
+import {loadState, saveToLocalStorage} from '../storage';
+import {loadWeb3, loadBlockchainData} from '../loadBlockchain';
+import $ from 'jquery';
 
 
 class ServiceProviderHome extends Component{
@@ -15,7 +15,7 @@ class ServiceProviderHome extends Component{
     // user click back on browser from showPatient home, 
     // so he move to serviveProviderHome and can't comeback to showPatient page 
     window.onpopstate  = (e) => { 
-      this.props.history.push('/ServiceProviderHome')
+      this.props.history.push('/ServiceProviderHome');
     }      
   }
   async componentDidMount() {
@@ -50,54 +50,53 @@ class ServiceProviderHome extends Component{
         searchValue:'0x',
         hasPermission:false,
         hasError: false
-      }
-     
-      this.permissions = null
-      this.searchPatient = this.searchPatient.bind(this)
-      this.checkPermission = this.checkPermission.bind(this)
-      this.changeSearchHandle = this.changeSearchHandle.bind(this)
+      };
+      this.permissions = null;
+      this.searchPatient = this.searchPatient.bind(this);
+      this.checkPermission = this.checkPermission.bind(this);
+      this.changeSearchHandle = this.changeSearchHandle.bind(this);
   }
   // check permission on blockchain
   async checkPermission(account){
     if(account !== "" && account !== undefined){       
       const check  = await this.permissions.methods.havePermission(account)
-      .call({from:this.state.account})
-      return check 
+      .call({from:this.state.account});
+      return check;
     }
     return false;
   }
   // on click search
   async searchPatient(){
-    const search = this.state.searchValue
+    const search = this.state.searchValue;
     // check if have permission
     if(search !== undefined && search !== '' 
     && search.length === 42 && search.match('0x[a-fA-F0-9]{40}$')){
       
-      this.setState({ loading: true }) 
-      const check = await this.checkPermission(search)
+      this.setState({ loading: true });
+      const check = await this.checkPermission(search);
       if(check){
-        let state = await loadState() // get the old state
-        state = $.extend(state,{patientAccount:search}) // add patientAccount to the state
-        await saveToLocalStorage(state)
-        this.setState({ loading: false })  
-        this.setState({patientAccount:search,hasPermission:true}) // move to show pateint mrc
+        let state = await loadState(); // get the old state
+        state = $.extend(state,{patientAccount:search}); // add patientAccount to the state
+        await saveToLocalStorage(state);
+        this.setState({ loading: false });  
+        this.setState({patientAccount:search,hasPermission:true}); // move to show pateint mrc
       }
       else{
-        window.alert("Sorry! you don't have permission!!")
-        this.setState({loading: false,patientAccount:'',hasPermission:false})
-        this.setState({searchValue:'0x'}) 
+        window.alert("Sorry! you don't have permission!!");
+        this.setState({loading: false,patientAccount:'',hasPermission:false});
+        this.setState({searchValue:'0x'});
       }
     }
     else{
-      this.setState({loading: false,hasPermission: false })
-      window.alert("Sorry! you entered incorrect account")
-      this.setState({searchValue:'0x'}) 
+      this.setState({loading: false,hasPermission: false });
+      window.alert("Sorry! you entered incorrect account");
+      this.setState({searchValue:'0x'});
     }
   }
 
   // value search change
   changeSearchHandle(event){
-    this.setState({searchValue:event.target.value})
+    this.setState({searchValue:event.target.value});
   }
 
     render() {

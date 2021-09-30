@@ -14,7 +14,7 @@ class App extends Component {
  
   async componentDidMount() {
     // loading blockchain 
-    localStorage.clear()
+    localStorage.clear();
     const blockchain = await loadWeb3();
     if(blockchain !== null){
      const blockchainData = await loadBlockchainData();
@@ -33,7 +33,7 @@ class App extends Component {
       login: false, // show login if false
       serviceProvider: null, //serviceProvider= true login has service povider. flase = login has patient, null=no login 
       loading:true // upalod web3 
-    }
+    };
     this.permissions = null;
   }
 
@@ -43,14 +43,22 @@ class App extends Component {
       privateKey:details.privateKey,
       login:true,
       serviceProvider:details.serviceProvider
-    }
+    };
     await saveToLocalStorage(state);
     this.setState({login:true, serviceProvider:details.serviceProvider});
   }
 
   async checkSerivceProvider(account){
-    const check  = await this.permissions.methods.hisServiceProvider()
+    let check = false;
+    try {
+      check  = await this.permissions.methods.hisServiceProvider()
       .call({from:account});
+    }
+    catch(e) {
+      console.log(e);
+      check = true;
+    }
+   
     return check;
   }
 
@@ -87,13 +95,13 @@ class App extends Component {
 
 
 function Login(props){
-  const [privateKey,setPrivateKey] = useState('')
-  const [account] = useState(props.parent.state.account)
-  const [serviceProvider,setServiceProvider] = useState(false)
-  const [msgError, setMsgError] = useState('')
+  const [privateKey,setPrivateKey] = useState('');
+  const [account] = useState(props.parent.state.account);
+  const [serviceProvider,setServiceProvider] = useState(false);
+  const [msgError, setMsgError] = useState('');
 
   const handleChangePrivateKey = (event) =>{
-    setPrivateKey(event.target.value)
+    setPrivateKey(event.target.value);
   }
   const selectTypeToLogin = async (event) =>{
     if(event.target.id === 'serviceProviderLogin'){
@@ -107,12 +115,12 @@ function Login(props){
       }
     }
     else {
-      setServiceProvider(false)
+      setServiceProvider(false);
     }
   } 
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if(privateKey !== '' && privateKey !== undefined
     && privateKey.length === 64 && privateKey.match('^[A-Fa-f0-9]{64}$') 
@@ -122,13 +130,13 @@ function Login(props){
         privateKey:privateKey,
         serviceProvider: serviceProvider
       }
-      setMsgError('')
-      props.parent.startLogin(details)
+      setMsgError('');
+      props.parent.startLogin(details);
     }
     else{
-      setMsgError("Something is incorrect, please try again")
-      setPrivateKey('')
-      setServiceProvider(false)
+      setMsgError("Something is incorrect, please try again");
+      setPrivateKey('');
+      setServiceProvider(false);
     }
   }
   return (
