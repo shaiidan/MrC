@@ -63,7 +63,7 @@ $ geth --datadir node1/ --miner.gasprice '0' --mine --unlock '0x26474347e1c57Fcc
 To know how to run the rest of the nodes go into the project enter the file:
 
 '''bash
-& cd MrC/network/.configNetwork/run_nodes.txt
+$ cd MrC/network/.configNetwork/run_nodes.txt
 '''
 And each node contains run=(we will copy it to bash)
 
