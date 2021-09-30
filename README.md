@@ -95,6 +95,9 @@ Your application should run on port 3000 with the *development* environment conf
 
 That's it! Your application should be running. To proceed with your development, check the other sections in this documentation.
 
+Or 
+
+Run this url https://medical-records-chain.herokuapp.com/
 
 ## Running the tests
 
