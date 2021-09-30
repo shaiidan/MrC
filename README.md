@@ -56,14 +56,16 @@ Test Network - Using Ganache,
 "Live" Network - via Geth,
 To run the first node we will run the following command -
 
-'''bash
-$ cd network & geth --datadir node1/ --miner.gasprice '0' --mine --unlock '0x26474347e1c57Fcc59F10675E196ba46a101205c' --password node1/password.txt --syncmode 'full' --port 40310 --http --http.port 8501 --http.addr '0.0.0.0' --http.vhosts "*"   --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
-'''
+```bash
+$ cd network
+$ geth --datadir node1/ --miner.gasprice '0' --mine --unlock '0x26474347e1c57Fcc59F10675E196ba46a101205c' --password node1/password.txt --syncmode 'full' --port 40310 --http --http.port 8501 --http.addr '0.0.0.0' --http.vhosts "*"   --http.api 'admin,debug,web3,eth,txpool,personal,clique,miner,net' --ipcdisable --nodiscover --networkid 1405 --allow-insecure-unlock  --verbosity 3 --light.serve 1000
+```
+
 To know how to run the rest of the nodes go into the project enter the file:
 
-'''bash
+```bash
 $ cd MrC/network/.configNetwork/run_nodes.txt
-'''
+```
 And each node contains run=(we will copy it to bash)
 
 ## Running MetaMask
@@ -73,9 +75,10 @@ Using the private key written in the path
 If not registered, you can import the key file located in each of the nodes' folders
 For example for node 1 we will import the file in path -
 
-'''bash
-& cd MrC/network/node1/keystore/UTC - 2021-09-13T05-27-02.739754700Z - 26474347e1c57fcc59f10675e196ba46a101205
-'''
+
+```bash
+$ cd MrC/network/node1/keystore/UTC - 2021-09-13T05-27-02.739754700Z - 26474347e1c57fcc59f10675e196ba46a101205
+```
 
 * If you using in test network on Ganache, add acounts from there. 
 
