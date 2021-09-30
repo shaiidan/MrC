@@ -1,12 +1,5 @@
 # MrC
 
-Our website simulate rental housing units for SCE students.
-
-SamiRoom is a full-stack JavaScript open-source , which provides a simulation for rental housing units for SCE students.
-The idea is to connect between apartment owners and SCE students, in order to ofer them rental their units.
-
-You can watch the site by enter this link - 
-[SiteView](https://samiroom.herokuapp.com/)
 
 ### Prerequisites
 
@@ -95,10 +88,7 @@ By clicking the button below you can signup for Heroku and deploy a working copy
 * Express 4.17.1
 
 ## Authors
-
-* **Rotem Reshef** - [RotemReshef](https://github.com/Rotemgold)
 * **Shai Idan** - [ShaiIdan](https://github.com/shaiidan)
-* **Stav Shlomovich** - [StavShlomovich](https://github.com/stav1997)
 * **Harel Jerbi** - [HarelJerbi](https://github.com/harel159)
 
 
