@@ -108,12 +108,6 @@ $ npm test
 ```
 
 
-###  Deploying MrC To Heroku
-
-By clicking the button below you can signup for Heroku and deploy a working copy of SamiRoom to the cloud without having to do the steps above.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/apps/medical-records-chain/deploy/github)
-
 
 ### Technologies
 
